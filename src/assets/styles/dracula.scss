@@ -1,0 +1,154 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$primary-color: (
+    50 : #e5e5e7,
+    100 : #bfbfc3,
+    200 : #94959b,
+    300 : #696a72,
+    400 : #484a54,
+    500 : #282a36,
+    600 : #242530,
+    700 : #1e1f29,
+    800 : #181922,
+    900 : #0f0f16,
+    A100 : #5b5bff,
+    A200 : #2828ff,
+    A400 : #0000f4,
+    A700 : #0000da,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #ffffff,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$accent-color: (
+    50 : #ffeff8,
+    100 : #ffd7ee,
+    200 : #ffbce3,
+    300 : #ffa1d7,
+    400 : #ff8dcf,
+    500 : #ff79c6,
+    600 : #ff71c0,
+    700 : #ff66b9,
+    800 : #ff5cb1,
+    900 : #ff49a4,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #fff0f7,
+    A700 : #ffd6ea,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$secondary-color: (
+    50 : #f7f2fe,
+    100 : #ebdffd,
+    200 : #dec9fc,
+    300 : #d1b3fb,
+    400 : #c7a3fa,
+    500 : #bd93f9,
+    600 : #b78bf8,
+    700 : #ae80f7,
+    800 : #a676f6,
+    900 : #9864f5,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #fdfcff,
+    A700 : #ede3ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$md-unicornio: (
+    50 : #f8eff4,
+    100 : #edd7e3,
+    200 : #e1bdd0,
+    300 : #d4a3bd,
+    400 : #cb8fae,
+    500 : #c27ba0,
+    600 : #bc7398,
+    700 : #b4688e,
+    800 : #ac5e84,
+    900 : #9f4b73,
+    A100 : #fffcfd,
+    A200 : #ffc9e2,
+    A400 : #ff96c7,
+    A700 : #ff7cb9,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+
+$palette-primary:   mat.define-palette($primary-color);
+$palette-accent:    mat.define-palette($accent-color);
+$palette-secondary: mat.define-palette($secondary-color);
+$palette-warn:      mat.define-palette($md-unicornio);
+
+$theme: mat.define-light-theme((
+    color : (
+        primary: $palette-primary,
+        secondary: $palette-accent,
+        accent: $palette-secondary,
+        warn: $palette-warn,
+    )
+));
+
+@include mat.all-component-themes($theme);

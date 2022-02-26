@@ -1,0 +1,193 @@
+@import "~@angular/material/theming";
+@import '../../../assets/styles/dracula.scss';
+
+:host{
+    height: 100%;
+}
+
+.container {
+    position: relative;
+
+    min-width: 500px;
+    max-width: 800px;
+
+    width: 50%;
+    height: 500px;
+}
+
+.loginBg {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    height: 420px;
+    background-color: mat-color($palette-primary);
+    box-shadow: 0 5px 45px rgba($color: #000000, $alpha: 0.2);
+    transition: 0.5s ease-in-out;
+}
+
+.loginBg.active {
+    background-color: mat-color($palette-warn,900);
+}
+
+.loginBg.active .box h2 {
+    color: mat-contrast($palette-warn,900);
+}
+
+.loginBg box {
+    position:  relative;
+    width: 50%;
+    height: 100%;
+}
+
+.loginBg .box h2 {
+    color: mat-color($palette-primary, 50);
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-bottom: 10px;
+    transition: 0.5s ease-in-out;
+}
+
+.loginBg .box button {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: mat-color($palette-warn, 50);
+    color: mat-color($palette-primary);
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+}
+
+.formBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: mat-color($palette-secondary,50);
+    z-index: 1000;
+    box-shadow: 0 5px 45px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    transition: 0.5s ease-in-out;
+}
+
+.formBox.active {
+    left: 50%;
+}
+
+.formBox .form {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 50px;
+    transition: 0.5s;
+}
+
+.formBox .signinForm {
+    transition-delay: 0.25s;
+}
+
+.formBox.active .signinForm {
+    left: -100%;
+    transition-delay: 0s;
+}
+
+.formBox .signupForm {
+    left: 100%;
+    transition-delay: 0s;
+}
+
+.formBox.active .signupForm {
+    left: 0%;
+    transition-delay: 0.25s;
+}
+
+.formBox .form form {
+    width: 100%;
+}
+
+.formBox .form form h3 {
+    font-size: 1.5em;
+    color: mat-color($palette-primary,600);
+    margin-bottom: 20px;
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.formBox.active .form form h3 {
+    color: mat-color($palette-accent,600);
+}
+
+.formBox .form form input {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    outline: none;
+    font-size: 16px;
+    border: 1px solid mat-color($palette-primary, 600);
+    transition: 0.5s;
+}
+
+.formBox.active .form form input {
+    border: 1px solid mat-color($palette-accent, 600);
+}
+
+.formBox .form form input[type="submit"] {
+    background-color: mat-color($palette-primary, 600);
+    border: none;
+    color: mat-contrast($palette-primary, 600);
+    max-width: 100px;
+    cursor: pointer;
+}
+
+.formBox.active .form form input[type="submit"] {
+    background-color: mat-color($palette-accent, 600);
+    color: mat-contrast($palette-accent, 600);
+}
+
+@media (max-width: 959px) {
+    .container {
+        max-width: 400px;
+        height: 650px;
+    }
+
+    .container .loginBg {
+        top: 0;
+        height: 100%;
+    }
+
+    .formBox{
+        width: 100%;
+        height: 500px;
+        top: 0;
+        box-shadow: none;
+    }
+
+    .formBox.active {
+        left: 0;
+        top: 150px;
+    }
+
+    .loginBg .box {
+        position: absolute;
+        width: 100%;
+        height: 150px;
+        bottom: 0;
+    }
+
+    .box.signin {
+        top: 0;
+    }
+}
+
+@media (max-width: 400px) {
+   .container {
+       min-width: 0px;
+       width: 100%;
+   }
+}
+
+@media (max-height: 650px) {
+    :host {
+        align-items: flex-start;
+    }
+}

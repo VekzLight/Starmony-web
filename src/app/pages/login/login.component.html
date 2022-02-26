@@ -1,0 +1,35 @@
+<div fxFlex fxLayout fxLayoutAlign="center center" class="login">
+    <div class="container">
+        <div class="loginBg" [ngClass]="{'active': activeForm, '': !activeForm}">
+            <div fxFlex fxLayout="column" fxLayoutAlign="center center" class="box signin">
+                <h2>¿Tienes una cuenta?</h2>
+                <button (click)="changeActive()" class="signinbtn">Entrar</button>
+            </div>
+            <div fxFlex fxLayout="column" fxLayoutAlign="center center" class="box signup">
+                <h2>¿No Tienes una cuenta?</h2>
+                <button (click)="changeActive()" class="signupbtn">Registrarse</button>
+            </div>
+        </div>
+        <div fxFlex fxLayout fxLayoutAlign="center center" class="formBox" [ngClass]="{'active': activeForm, '': !activeForm}">
+            <div class="form signinForm">
+                <form fxFlex fxLayout="column" action="">
+                    <h3>Iniciar sesión</h3>
+                    <input type="text" placeholder="Usuario">
+                    <input type="password" placeholder="Contraseña">
+                    <input type="submit" value="Login">
+                    <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
+                </form>
+            </div>
+            <div class="form signupForm">
+                <form fxFlex fxLayout="column" action="">
+                    <h3>Unirse</h3>
+                    <input type="text" placeholder="Usuario">
+                    <input type="text" placeholder="Correo Electronico">
+                    <input type="password" placeholder="Contraseña">
+                    <input type="password" placeholder="Confirmar Contraseña">
+                    <input type="submit" value="Registrar">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
