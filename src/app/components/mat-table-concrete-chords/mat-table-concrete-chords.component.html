@@ -1,0 +1,19 @@
+<table mat-table [dataSource]="concreteChords" class="mat-elevation-z8 w-auto">
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let concreteChord"> {{concreteChord.name}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="tonic">
+        <th mat-header-cell *matHeaderCellDef> Tonica </th>
+        <td mat-cell *matCellDef="let concreteChord"> {{concreteChord.tonic}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="notes">
+        <th mat-header-cell *matHeaderCellDef> Notas </th>
+        <td mat-cell *matCellDef="let concreteChord"> {{concreteChord.notes}} </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; let concreteChord; columns: displayedColumns;" (click)="selectConcreteChord(concreteChord.id)" [ngClass]="{'active': isSelectedConcreteChord(concreteChord.id), '': !isSelectedConcreteChord(concreteChord.id)}"></tr>
+</table>

@@ -6,12 +6,16 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AnalyzerComponent } from './pages/analyzer/analyzer.component';
 import { GeneratorComponent } from './pages/generator/generator.component';
+import { RecognizerComponent } from './pages/recognizer/recognizer.component';
+import { CreatorComponent } from './pages/creator/creator.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'analyzer', component: AnalyzerComponent},
   { path: 'generator', component: GeneratorComponent},
+  { path: 'recognizer', component: RecognizerComponent},
+  { path: 'creator', component: CreatorComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 

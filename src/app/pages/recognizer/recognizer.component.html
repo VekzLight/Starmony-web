@@ -1,0 +1,24 @@
+<div fxFlex fxLayout="column" fxLayoutAlign="start center" class="container">
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around center" class="headerMenu">
+        <button class="itemMenu" (click)="selectSearched('chord')" [ngClass]="{'active': isSelectedSearched('chord'), '': !isSelectedSearched('chord')}" mat-button>Acorde</button>
+        <button class="itemMenu" (click)="selectSearched('scale')" [ngClass]="{'active': isSelectedSearched('scale'), '': !isSelectedSearched('scale')}" mat-button>Escala</button>
+        <button class="itemMenu" (click)="selectSearched('interval')" [ngClass]="{'active': isSelectedSearched('interval'), '': !isSelectedSearched('interval')}" mat-button>Intervalo</button>
+        <button class="itemMenu" (click)="selectSearched('progression')" [ngClass]="{'active': isSelectedSearched('progression'), '': !isSelectedSearched('progression')}" mat-button>Progression</button>
+    </div>
+
+    <div fxFlex fxLayout="column" class="option_response">
+
+        <!-- Notas -->
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around center" class="itemContainer">
+            <button class="notes" (click)="selectNote(note.id)" [ngClass]="{'active': isSelectedNote(note.id), '': !isSelectedNote(note.id)}" *ngFor="let note of notes" mat-button>{{note.symbol}}</button>
+        </div>
+
+        <!-- Intervalos - Acordes y Respuesta -->
+        <div fxFlex fxLayout="row" class="optionContainer">
+            <app-mat-table-interval></app-mat-table-interval>
+            <app-mat-table-chords></app-mat-table-chords>
+            <app-mat-table-concrete-chords></app-mat-table-concrete-chords>
+        </div>
+    </div>
+</div>  

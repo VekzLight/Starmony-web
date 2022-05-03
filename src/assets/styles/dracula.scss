@@ -102,7 +102,7 @@ $secondary-color: (
 );
 
 /* For use in src/lib/core/theming/_palette.scss */
-$md-unicornio: (
+$accent-unicornio: (
     50 : #f8eff4,
     100 : #edd7e3,
     200 : #e1bdd0,
@@ -140,14 +140,14 @@ $md-unicornio: (
 $palette-primary:   mat.define-palette($primary-color);
 $palette-accent:    mat.define-palette($accent-color);
 $palette-secondary: mat.define-palette($secondary-color);
-$palette-warn:      mat.define-palette($md-unicornio);
+$palette-unicornio:      mat.define-palette($accent-unicornio);
 
 $theme: mat.define-light-theme((
     color : (
         primary: $palette-primary,
         secondary: $palette-accent,
         accent: $palette-secondary,
-        warn: $palette-warn,
+        unicornio: $palette-unicornio,
     )
 ));
 

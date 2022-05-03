@@ -17,6 +17,12 @@ import { LoginComponent } from './pages/login/login.component';
 import { MatResponsiveNavComponent } from './components/mat-responsive-nav/mat-responsive-nav.component';
 import { MatResponsiveNavHeaderComponent } from './components/mat-responsive-nav-header/mat-responsive-nav-header.component';
 import { MatResponsiveNavSideComponent } from './components/mat-responsive-nav-side/mat-responsive-nav-side.component';
+import { RecognizerComponent } from './pages/recognizer/recognizer.component';
+import { CreatorComponent } from './pages/creator/creator.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { MatTableIntervalComponent } from './components/mat-table-interval/mat-table-interval.component';
+import { MatTableChordsComponent } from './components/mat-table-chords/mat-table-chords.component';
+import { MatTableConcreteChordsComponent } from './components/mat-table-concrete-chords/mat-table-concrete-chords.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +31,13 @@ import { MatResponsiveNavSideComponent } from './components/mat-responsive-nav-s
     HomeComponent,
     MatResponsiveNavHeaderComponent,
     MatResponsiveNavSideComponent,
-    LoginComponent
+    LoginComponent,
+    RecognizerComponent,
+    CreatorComponent,
+    ProfileComponent,
+    MatTableIntervalComponent,
+    MatTableChordsComponent,
+    MatTableConcreteChordsComponent
   ],
   imports: [
     BrowserModule,

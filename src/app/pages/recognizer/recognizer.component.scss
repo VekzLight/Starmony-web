@@ -1,0 +1,59 @@
+@import "~@angular/material/theming";
+@import '../../../assets/styles/dracula.scss';
+
+
+.container{
+    width: 100%;
+    height: 100%;
+}
+
+.headerMenu{
+    width: 80%;
+}
+
+.itemMenu{
+    margin: 5px;
+    height: 50px;
+    width: 200px;
+    background-color: mat-color($palette-secondary,600);
+    color: mat-contrast($palette-secondary, 600);
+}
+
+.itemMenu.active{
+    background-color: mat-color($palette-accent,600);
+    color: mat-contrast($palette-accent,600);
+}
+
+
+.option_response{
+    width: 100%;
+    border: 1px solid mat-color($palette-primary);
+}
+
+.itemContainer{
+    width: 100%;
+    border: 1px solid mat-color($palette-primary);
+}
+
+
+.filters{
+    border: 1px solid mat-color($palette-primary);
+}
+
+.response{
+    border: 1px solid mat-color($palette-primary);
+}
+
+.notes{
+    margin: 5px;
+    height: 50px;
+    background-color: mat-color($palette-secondary,600);
+    color: mat-contrast($palette-secondary,600);
+}
+
+.notes.active{
+    background-color: mat-color($palette-accent,600);
+    color: mat-contrast($palette-accent,600);
+}
+
+

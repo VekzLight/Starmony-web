@@ -1,0 +1,31 @@
+@import "~@angular/material/theming";
+@import '../../../assets/styles/dracula.scss';
+
+:host{
+    height: 100%;
+}
+
+.matCard{
+    margin: 10px;
+    height: 200px;
+    width: 200px;
+    align-items: center;
+    background-color: mat-color($palette-unicornio,600);
+    color: mat-contrast($palette-unicornio,600);
+
+    box-shadow: 0 5px 45px rgba(0, 0, 0, 0.25);
+}
+
+.matCard:hover{
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 2rem;
+}
+
+a:hover, a:active {
+    color: lightgray;
+}
