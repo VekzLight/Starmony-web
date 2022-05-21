@@ -18,7 +18,15 @@ $maximum-blue-purple: rgba(189, 178, 255, 1);
 $mauve: rgba(255, 198, 255, 1);
 $baby-powder: rgba(255, 255, 252, 1);
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+    margin: 0px;
+    
+    min-width: min-content;
+    min-height: min-content;
 
+    height: 100%;
+}
 
+body { 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

@@ -1,1 +1,44 @@
-<p>generator works!</p>
+<div fxFlex fxLayout="column" class="container">
+    
+    <h2>Seleccione Una Escala y Un Acorde</h2>
+    <mat-card style="--clr: #f0ff22; --i:0;" class="return" routerLink="/home"><a class="regresar" routerLink="/home">< Atras</a></mat-card>
+
+    <div fxLayout="row wrap" fxLayoutAlign="start start" class="itemContainer">
+        <h4>Escalas:</h4>
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-between  start">
+            <button fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="concreteScales"
+                    *ngFor="let concreteScale of userConcreteScales"
+                    [ngClass]="{'active': concreteScale.id_concrete_scale == concreteScaleSelected, '': concreteScale.id_concrete_scale != concreteScaleSelected}"
+                    (click)="selectConcreteScale(concreteScale)"
+                    mat-button> 
+                    {{printConcreteScale(concreteScale)}}
+            </button>
+        </div>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutAlign="start start" class="itemContainer">
+        <h4>Acordes:</h4>
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-between  start">
+            <button fxFlex fxLayout="row" fxLayoutAlign="space-between center"  class="concreteChords" 
+                    *ngFor="let concreteChord of userConcreteChords"
+                    [ngClass]="{'active': concreteChord.id_concrete_chord == concreteChordSelected, '': concreteChord.id_concrete_chord != concreteChordSelected}"
+                    (click)="selectConcreteChord(concreteChord)"
+                    mat-button> 
+                    {{printConcreteChord(concreteChord)}}
+            </button>
+        </div>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutAlign="start start" class="itemContainer">
+        <h4>Respuesta:</h4>
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="space start">
+            <button fxFlex fxLayout="row" fxLayoutAlign="space-between center"  class="concreteChords" 
+                    *ngFor="let response of responses"
+                    [ngClass]="{'active': response.id_concrete_chord == concreteChordSelected, '': response.id_concrete_chord != concreteChordSelected}"
+                    (click)="selectConcreteChord(response)"
+                    mat-button> 
+                    {{printConcreteChord(response)}}
+            </button>
+        </div>
+    </div>
+</div>  

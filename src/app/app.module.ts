@@ -14,30 +14,35 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 
-import { MatResponsiveNavComponent } from './components/mat-responsive-nav/mat-responsive-nav.component';
-import { MatResponsiveNavHeaderComponent } from './components/mat-responsive-nav-header/mat-responsive-nav-header.component';
-import { MatResponsiveNavSideComponent } from './components/mat-responsive-nav-side/mat-responsive-nav-side.component';
 import { RecognizerComponent } from './pages/recognizer/recognizer.component';
 import { CreatorComponent } from './pages/creator/creator.component';
+import { GeneratorComponent } from './pages/generator/generator.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { MatTableIntervalComponent } from './components/mat-table-interval/mat-table-interval.component';
-import { MatTableChordsComponent } from './components/mat-table-chords/mat-table-chords.component';
-import { MatTableConcreteChordsComponent } from './components/mat-table-concrete-chords/mat-table-concrete-chords.component';
+import { RecognizerChordComponent } from './components/recognizer-chord/recognizer-chord.component';
+import { RecognizerScaleComponent } from './components/recognizer-scale/recognizer-scale.component';
+import { RecognizerIntervalComponent } from './components/recognizer-interval/recognizer-interval.component';
+import { RecognizerProgressionComponent } from './components/recognizer-progression/recognizer-progression.component';
+import { FormsModule } from '@angular/forms';
+import { CollectionComponent } from './pages/collection/collection.component';
+import { CreatorScaleComponent } from './components/creator-scale/creator-scale.component';
+import { CreatorProgressionComponent } from './components/creator-progression/creator-progression.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MatResponsiveNavComponent,
     HomeComponent,
-    MatResponsiveNavHeaderComponent,
-    MatResponsiveNavSideComponent,
     LoginComponent,
     RecognizerComponent,
     CreatorComponent,
+    GeneratorComponent,
     ProfileComponent,
-    MatTableIntervalComponent,
-    MatTableChordsComponent,
-    MatTableConcreteChordsComponent
+    RecognizerChordComponent,
+    RecognizerScaleComponent,
+    RecognizerIntervalComponent,
+    RecognizerProgressionComponent,
+    CollectionComponent,
+    CreatorScaleComponent,
+    CreatorProgressionComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,8 @@ import { MatTableConcreteChordsComponent } from './components/mat-table-concrete
     MaterialModule,
     LayoutModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

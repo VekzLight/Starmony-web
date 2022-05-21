@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -9,6 +10,10 @@ import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [],
@@ -21,7 +26,12 @@ import {MatTableModule} from '@angular/material/table';
     MatListModule,
     MatCardModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatExpansionModule,
+    MatPaginatorModule,
+    MatCheckboxModule,
+    ScrollingModule,
+    MatMenuModule
   ],
   exports:[
     MatToolbarModule,
@@ -31,7 +41,12 @@ import {MatTableModule} from '@angular/material/table';
     MatListModule,
     MatCardModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    ScrollingModule,
+    MatMenuModule
   ]
 })
 export class MaterialModule { }

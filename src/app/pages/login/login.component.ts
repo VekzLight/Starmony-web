@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/interfaces/user.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,16 +10,61 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  activeForm: boolean;
+  message: String = "";
+  messageLogin: String = "";
 
-  constructor() {
+  userData: User ={
+    id: -1,
+    username: "",
+    password: "",
+    email:""
+  };
+  passwordConfirm: string = "";
+
+  activeForm: boolean;
+  token: any;
+
+  constructor(
+    private userService: UserService,
+    private router: Router) {
     this.activeForm = false;
    }
 
   ngOnInit(): void {
+    if(localStorage.getItem('token') != null) this.router.navigate(['/home']);
   }
 
   changeActive () {
     this.activeForm = !this.activeForm;
+  }
+
+  loginUser(){
+    this.userService.login(this.userData).subscribe((resp:any)=>{
+      if(resp.type != 1){
+        this.messageLogin = resp.message;
+      } else {
+        this.token = resp.message;
+        localStorage.setItem('token', this.token);
+        localStorage.setItem('username', this.userData.username);
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+
+  registrarUsuario(){
+    if(this.passwordConfirm != this.userData.password){
+      this.message = "Las contraseñas no son iguales."
+      return;
+    }
+
+    this.userService.register(this.userData).subscribe((resp:any)=>{
+      if(resp.type != 1){
+        this.message = resp.message;
+      } else {
+        this.token = resp;
+        localStorage.setItem('token', this.token);
+        this.message = "Usuario Registrado. Puede Iniciar Session."
+      }
+    });
   }
 }

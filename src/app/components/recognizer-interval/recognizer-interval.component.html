@@ -1,0 +1,157 @@
+<div fxFlex fxLayout="column" fxLayoutAlign="start center" class="container" *ngIf="!isAnalize">
+    <h3>Seleccione las Caracteristicas de su Acorde</h3>
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="start start" class="itemContainer">
+        <h4>Primera Nota:</h4>
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around start">
+            <button class="tonic" 
+                    (click)="selectFirstNote(note.id)" 
+                    [ngClass]="{'active': tonic == note.id, '': tonic != note.id}" 
+                    *ngFor="let note of notes" 
+                    mat-button> 
+                    {{note.symbol}} 
+            </button>
+        </div>
+    </div>
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="start start" class="itemContainer">
+        <h4>Notas del Intervalo:</h4>
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around start">
+            <button class="notes" 
+                    (click)="selectNote(note.id)" 
+                    [ngClass]="{'active': isSelectedNote(note.id), '': !isSelectedNote(note.id)}" 
+                    *ngFor="let note of notes" 
+                    mat-button> 
+                    {{note.symbol}} 
+            </button>
+        </div>
+    </div>
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="start start" class="itemContainer">
+        <mat-checkbox (click)="clearInterval()" [(ngModel)]="intervalsCheck">Intervalos:</mat-checkbox>
+        
+        <cdk-virtual-scroll-viewport orientation="vertical" itemSize="3"
+            fxFlex fxLayout="row wrap" fxLayoutAlign="space-between  start" class="cdkContainer" *ngIf="intervalsCheck">
+            <button class="intervals" 
+                    (click)="selectInterval(interval.id)"
+                    [ngClass]="{'active': isSelectedInterval(interval.id), '': !isSelectedInterval(interval.id)}"
+                    *cdkVirtualFor="let interval of intervals" 
+                    mat-button> 
+                    {{interval.name}} 
+            </button>
+        </cdk-virtual-scroll-viewport>
+    </div>
+
+    <button class="buscar" (click)="getConcreteIntervalsWithME()"  mat-button>Buscar</button>
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="start start" class="itemContainer">
+        <h4>Intervalos Encontrados:</h4>
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-between  start">
+            <button fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="concreteIntervals" 
+                    *ngFor="let concreteInterval of concreteIntervals" 
+                    [ngClass]="{'active': isSelectedConcreteInterval(concreteInterval.id_concrete_interval), '': !isSelectedConcreteInterval(concreteInterval.id_concrete_interval)}"
+                    mat-button> 
+
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button (click)="guardarIntervaloConcreto(concreteInterval.id_concrete_interval)" *ngIf="!isSelectedConcreteInterval(concreteInterval.id_concrete_interval)" mat-menu-item>
+                            <mat-icon>save</mat-icon>
+                            <span>Guardar</span>
+                        </button>
+                        <button (click)="eliminarIntervaloConcreto(concreteInterval.id_concrete_interval)" *ngIf="isSelectedConcreteInterval(concreteInterval.id_concrete_interval)"mat-menu-item>
+                            <mat-icon>delete</mat-icon>
+                            <span>Eliminar</span>
+                        </button>
+                        <button (click)="analizeInterval(concreteInterval)" mat-menu-item>
+                            <mat-icon>description</mat-icon>
+                            <span>Analizar</span>
+                        </button>
+                    </mat-menu>
+
+                    {{printConcreteIntervals(concreteInterval)}}
+                    
+            </button>
+        </div>
+    </div>
+</div>
+
+<div fxFlex fxLayout="column" fxLayoutAlign="start center" class="container" *ngIf="isAnalize">
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-between start" style="width: 100%;">
+        <mat-card (click)="unanalizeInterval()"style="--clr: #f0ff22; --i:0;" class="regresar" ><a class="regresar"><<</a></mat-card>
+        <button fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="concreteIntervals"
+            [ngClass]="{'active': isSelectedConcreteInterval(toAnalize[0].id_concrete_interval), '': !isSelectedConcreteInterval(toAnalize[0].id_concrete_interval)}"
+            mat-button> 
+
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button (click)="guardarIntervaloConcreto(toAnalize[0].id_concrete_interval)" *ngIf="!isSelectedConcreteInterval(toAnalize[0].id_concrete_interval)" mat-menu-item>
+                    <mat-icon>save</mat-icon>
+                    <span>Guardar</span>
+                </button>
+                <button (click)="eliminarIntervaloConcreto(toAnalize[0].id_concrete_interval)" *ngIf="isSelectedConcreteInterval(toAnalize[0].id_concrete_interval)"mat-menu-item>
+                    <mat-icon>delete</mat-icon>
+                    <span>Eliminar</span>
+                </button>
+            </mat-menu>
+
+            {{printConcreteIntervals(toAnalize[0])}}
+        </button>
+    </div>  
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="start start" class="itemContainer">
+        <h4>Acordes con Intervalo:</h4>
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-between  start">
+            <button fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="concreteChord"
+            *ngFor="let concreteChord of concreteChords" 
+                    [ngClass]="{'active': concreteChordsSelected.includes(concreteChord.id_concrete_chord), '': !concreteChordsSelected.includes(concreteChord.id_concrete_chord)}"
+                    mat-button> 
+
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button (click)="guardarAcordeConcreto(concreteChord.id_concrete_chord)" *ngIf="!isSelectedConcreteChord(concreteChord.id_concrete_chord)" mat-menu-item>
+                            <mat-icon>save</mat-icon>
+                            <span>Guardar</span>
+                        </button>
+                        <button (click)="eliminarAcordeConcreto(concreteChord.id_concrete_chord)" *ngIf="isSelectedConcreteChord(concreteChord.id_concrete_chord)"mat-menu-item>
+                            <mat-icon>delete</mat-icon>
+                            <span>Eliminar</span>
+                        </button>
+                    </mat-menu>
+
+                    {{printConcreteChord(concreteChord)}}
+            </button>
+        </div>
+    </div>
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="start start" class="itemContainer">
+        <h4>Escalas con Intervalo:</h4>
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-between  start">
+            <button fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="concreteScales" 
+            *ngFor="let concreteScale of concreteScales" 
+                    [ngClass]="{'active': isSelectedConcreteScale(concreteScale.id_concrete_scale), '': !isSelectedConcreteScale(concreteScale.id_concrete_scale)}"
+                    mat-button> 
+
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button (click)="guardarEscalaConcreta(concreteScale.id_concrete_scale)" *ngIf="!isSelectedConcreteScale(concreteScale.id_concrete_scale)" mat-menu-item>
+                            <mat-icon>save</mat-icon>
+                            <span>Guardar</span>
+                        </button>
+                        <button (click)="eliminarEscalaConcreta(concreteScale.id_concrete_scale)" *ngIf="isSelectedConcreteScale(concreteScale.id_concrete_scale)"mat-menu-item>
+                            <mat-icon>delete</mat-icon>
+                            <span>Eliminar</span>
+                        </button>
+                    </mat-menu>
+
+                    {{printConcreteScale(concreteScale)}}
+            </button>
+        </div>
+    </div>
+</div>

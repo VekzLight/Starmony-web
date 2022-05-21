@@ -1,1 +1,12 @@
-<p>creator works!</p>
+<div fxFlex fxLayout="column start" class="container">
+    
+    <h2>¿Que Elemento Musical Desea Crear?</h2>
+    <mat-card style="--clr: #f0ff22; --i:0;" class="return" routerLink="/home"><a class="regresar" routerLink="/home">< Atras</a></mat-card>
+    <div class="containerButtons">
+        <mat-card routerLink="/creator/scale" style="--clr: #00ccff; --i:1;" fxFlex fxLayout fxLayoutAlign="center center" class="itemMenu" (click)="selectSearched('scale')" [ngClass]="{'active': isSelectedSearched('scale'), '': !isSelectedSearched('scale')}"><a>Escala</a></mat-card>
+        <mat-card routerLink="/creator/progression" style="--clr: #7722e6; --i:3;" fxFlex fxLayout fxLayoutAlign="center center" class="itemMenu" (click)="selectSearched('progression')" [ngClass]="{'active': isSelectedSearched('progression'), '': !isSelectedSearched('progression')}"><a>Progression</a></mat-card>
+    </div>
+
+    <router-outlet></router-outlet>
+
+</div>  

@@ -1,0 +1,104 @@
+<div fxFlex fxLayout="column" fxLayoutAlign="start center" class="container" >
+    <h3>Describa las Caracteristicas de su Escala</h3>
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around center" class="itemContainer">
+        <input [(ngModel)]="scale.name"   [ngModelOptions]="{standalone: true}" type="text" placeholder="Nombre de la Escala">
+        <input [(ngModel)]="scale.symbol" [ngModelOptions]="{standalone: true}" type="text" placeholder="Simbolo de la Escala">
+        <input [(ngModel)]="scale.code"   [ngModelOptions]="{standalone: true}" type="text" placeholder="Codigo de la Escala">
+    </div>
+
+    <h3>Codigo de Semitonos de la Escala</h3>
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around center" class="itemContainer">
+        
+        <button class="semitones"
+                (click)="addSemitone(semitone)"
+                *ngFor="let semitone of [1,2,3,4,5,6,7,8,9,10,11,12] " 
+                mat-button> 
+                {{semitone}} 
+            </button>
+    </div>
+
+    <button class="buscar" (click)="crearEscala()"  mat-button>Crear</button>
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="start start" class="itemContainer" *ngIf="!validCode">
+        <h4>Codigo no valido</h4>
+        <h3>Los Semitonos deben de sumar maximo 12</h3>
+    </div>
+    
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-between start" style="width: 100%;"  *ngIf="isCreated">
+        <button fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="concreteScales"
+                [ngClass]="{'active': isSelectedConcreteScale(concreteScale.id_concrete_scale), '': !isSelectedConcreteScale(concreteScale.id_concrete_scale)}"
+                mat-button> 
+
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button (click)="guardarEscalaConcreta(concreteScale.id_concrete_scale)" *ngIf="!isSelectedConcreteScale(concreteScale.id_concrete_scale)" mat-menu-item>
+                        <mat-icon>save</mat-icon>
+                        <span>Guardar</span>
+                    </button>
+                    <button (click)="eliminarEscalaConcreta(concreteScale.id_concrete_scale)" *ngIf="isSelectedConcreteScale(concreteScale.id_concrete_scale)"mat-menu-item>
+                        <mat-icon>delete</mat-icon>
+                        <span>Eliminar</span>
+                    </button>
+                </mat-menu>
+
+                {{printConcreteScale(concreteScale)}}
+        </button>
+    </div>
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="start start" class="itemContainer" *ngIf="isCreated">
+        <h4>Ejemplo con la nota C:</h4>
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around start">
+            <button class="tonic" 
+                [ngClass]="{'active': tonic == note.id, '': tonic != note.id}" 
+                *ngFor="let note of notes" 
+                mat-button> 
+                {{note.symbol}} 
+            </button>
+        </div>
+    </div>
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="start start" class="itemContainer" *ngIf="isCreated">
+        <h4>Notas de la Escala:</h4>
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around start">
+            <button class="notes" 
+                [ngClass]="{'active': isSelectedNote(note.id), '': !isSelectedNote(note.id)}" 
+                *ngFor="let note of notes" 
+                mat-button> 
+                {{note.symbol}} 
+            </button>
+        </div>
+    </div>
+
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="start start" class="itemContainer" *ngIf="isCreated">
+        <h4>Grados de la Escala:</h4>
+        <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-between  start">
+            <button fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="concreteChord"
+            *ngFor="let grade of grades; let i = index;" 
+                    [ngClass]="{'active': concreteChordsSelected.includes(grade.id_concrete_chord), '': !concreteChordsSelected.includes(grade.id_concrete_chord)}"
+                    mat-button> 
+
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button (click)="guardarAcordeConcreto(grade.id_concrete_chord)" *ngIf="!isSelectedConcreteChord(grade.id_concrete_chord)" mat-menu-item>
+                            <mat-icon>save</mat-icon>
+                            <span>Guardar</span>
+                        </button>
+                        <button (click)="eliminarAcordeConcreto(grade.id_concrete_chord)" *ngIf="isSelectedConcreteChord(grade.id_concrete_chord)"mat-menu-item>
+                            <mat-icon>delete</mat-icon>
+                            <span>Eliminar</span>
+                        </button>
+                    </mat-menu>
+
+                    {{printConcreteGrade(grade, i + 1)}}
+            </button>
+        </div>
+    </div>
+
+</div>

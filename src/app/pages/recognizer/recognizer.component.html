@@ -1,24 +1,14 @@
-<div fxFlex fxLayout="column" fxLayoutAlign="start center" class="container">
-
-    <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around center" class="headerMenu">
-        <button class="itemMenu" (click)="selectSearched('chord')" [ngClass]="{'active': isSelectedSearched('chord'), '': !isSelectedSearched('chord')}" mat-button>Acorde</button>
-        <button class="itemMenu" (click)="selectSearched('scale')" [ngClass]="{'active': isSelectedSearched('scale'), '': !isSelectedSearched('scale')}" mat-button>Escala</button>
-        <button class="itemMenu" (click)="selectSearched('interval')" [ngClass]="{'active': isSelectedSearched('interval'), '': !isSelectedSearched('interval')}" mat-button>Intervalo</button>
-        <button class="itemMenu" (click)="selectSearched('progression')" [ngClass]="{'active': isSelectedSearched('progression'), '': !isSelectedSearched('progression')}" mat-button>Progression</button>
+<div fxFlex fxLayout="column start" class="container">
+    
+    <h2>¿Que Elemento Musical Busca?</h2>
+    <mat-card style="--clr: #f0ff22; --i:0;" class="return" routerLink="/home"><a class="regresar" routerLink="/home">< Atras</a></mat-card>
+    <div class="containerButtons">
+        <mat-card routerLink="/recognizer/chord" style="--clr: #ff22bb; --i:0;" fxFlex fxLayout fxLayoutAlign="center center" class="itemMenu" (click)="selectSearched('chord')" [ngClass]="{'active': isSelectedSearched('chord'), '': !isSelectedSearched('chord')}" ><a>Acorde</a></mat-card>
+        <mat-card routerLink="/recognizer/scale" style="--clr: #00ccff; --i:1;" fxFlex fxLayout fxLayoutAlign="center center" class="itemMenu" (click)="selectSearched('scale')" [ngClass]="{'active': isSelectedSearched('scale'), '': !isSelectedSearched('scale')}"><a>Escala</a></mat-card>
+        <mat-card routerLink="/recognizer/interval" style="--clr: #22e622; --i:2;" fxFlex fxLayout fxLayoutAlign="center center" class="itemMenu" (click)="selectSearched('interval')" [ngClass]="{'active': isSelectedSearched('interval'), '': !isSelectedSearched('interval')}"><a>Intervalo</a></mat-card>
+        <mat-card routerLink="/recognizer/progression" style="--clr: #7722e6; --i:3;" fxFlex fxLayout fxLayoutAlign="center center" class="itemMenu" (click)="selectSearched('progression')" [ngClass]="{'active': isSelectedSearched('progression'), '': !isSelectedSearched('progression')}"><a>Progression</a></mat-card>
     </div>
 
-    <div fxFlex fxLayout="column" class="option_response">
+    <router-outlet></router-outlet>
 
-        <!-- Notas -->
-        <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around center" class="itemContainer">
-            <button class="notes" (click)="selectNote(note.id)" [ngClass]="{'active': isSelectedNote(note.id), '': !isSelectedNote(note.id)}" *ngFor="let note of notes" mat-button>{{note.symbol}}</button>
-        </div>
-
-        <!-- Intervalos - Acordes y Respuesta -->
-        <div fxFlex fxLayout="row" class="optionContainer">
-            <app-mat-table-interval></app-mat-table-interval>
-            <app-mat-table-chords></app-mat-table-chords>
-            <app-mat-table-concrete-chords></app-mat-table-concrete-chords>
-        </div>
-    </div>
 </div>  

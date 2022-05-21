@@ -14,20 +14,21 @@
             <div class="form signinForm">
                 <form fxFlex fxLayout="column" action="">
                     <h3>Iniciar sesión</h3>
-                    <input type="text" placeholder="Usuario">
-                    <input type="password" placeholder="Contraseña">
-                    <input type="submit" value="Login">
-                    <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
-                </form>
+                    <input [(ngModel)]="userData.username" name="username" type="text" placeholder="Usuario">
+                    <input [(ngModel)]="userData.password" name="password" type="password" placeholder="Contraseña">
+                    <input (click)="loginUser()" type="submit" value="Login">
+                    <p class="error">{{messageLogin}}</p>
+                    </form>
             </div>
             <div class="form signupForm">
                 <form fxFlex fxLayout="column" action="">
                     <h3>Unirse</h3>
-                    <input type="text" placeholder="Usuario">
-                    <input type="text" placeholder="Correo Electronico">
-                    <input type="password" placeholder="Contraseña">
-                    <input type="password" placeholder="Confirmar Contraseña">
-                    <input type="submit" value="Registrar">
+                    <input [(ngModel)]="userData.username" [ngModelOptions]="{standalone: true}" type="text" placeholder="Usuario">
+                    <input [(ngModel)]="userData.email"    [ngModelOptions]="{standalone: true}" type="text" placeholder="Correo Electronico">
+                    <input [(ngModel)]="userData.password" [ngModelOptions]="{standalone: true}" type="password" placeholder="Contraseña">
+                    <input [(ngModel)]="passwordConfirm"   [ngModelOptions]="{standalone: true}" type="password" placeholder="Confirmar Contraseña">
+                    <input (click)="registrarUsuario()" type="submit" value="Registrar">
+                    <p class="error">{{message}}</p>
                 </form>
             </div>
         </div>

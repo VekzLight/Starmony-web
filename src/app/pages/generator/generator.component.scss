@@ -1,0 +1,159 @@
+@import "~@angular/material/theming";
+@import '../../../assets/styles/dracula.scss';
+
+:host{
+    height: auto;
+    min-height: 100%;
+    background-color: mat-color($palette-primary,900);
+}
+
+.container{
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    z-index: 1;
+}
+
+.return{
+    position: absolute;
+
+    margin-left: 10px;
+    margin-top:10px;
+
+    height: 20px;
+    width: 50px;
+
+    overflow: hidden;
+    align-items: center;
+    background-color: rgba($color: #eb3232, $alpha: 1.0);
+    
+    transition: 1s;
+}
+
+.return:hover{
+    box-shadow: 0 5px 45px rgb(248, 0, 0);
+    background-color: rgba($color: #e21d1d, $alpha: 1.0);
+    cursor: pointer;
+}
+
+h1{
+    margin-top: 50px;    
+    font-size: 3em;
+    text-align: center;
+    color: mat-color($palette-accent,900)
+}
+
+h2{
+    margin-top: 20px;  
+    font-size: 2em;
+    text-align: center;
+    color: mat-contrast($palette-primary,900)
+}
+
+h3{
+    margin-top: 30px;  
+    font-size: 1.5em;
+    text-align: center;
+    color: mat-contrast($palette-primary,900)
+}
+
+h4{
+    display: inline-block;
+    white-space: normal;
+    width: 180px;
+    height: 100%;
+    margin: 10px;
+    font-size: 1em;
+    text-align: right;
+    vertical-align: middle;
+    color: mat-contrast($palette-primary,900)
+}
+
+
+
+
+
+
+.concreteChords{
+    margin: 10px;
+    height: 40px;
+    background-color: rgba(255,255,255,.1);
+    box-shadow: 0px 0px 5px 3px #ff22bb;
+    color: mat-contrast($palette-primary,900);
+    width: 100%;
+    min-width: 90%;
+}
+
+.concreteChords:hover{
+    background-color: rgba(0,0,0,.2);
+    box-shadow: 0px 0px 5px 3px #ff22bb,
+                    0 0 30px #ff22bb,
+                    0 0 60px #ff22bb,
+                    0 0 100px #ff22bb;
+}
+
+.concreteChords.active{
+    color: black;
+    text-shadow: 0px 0px 2px black;
+    background-color: #ff22bb;
+    box-shadow: 0px 0px 5px 3px #ff22bb,
+                    0 0 30px #ff22bb,
+                    0 0 60px #ff22bb,
+                    0 0 100px #ff22bb;
+}
+
+
+
+.concreteScales{
+    margin: 10px;
+    height: 40px;
+    background-color: rgba(255,255,255,.1);
+    box-shadow: 0px 0px 5px 3px #00ccff;
+    color: mat-contrast($palette-primary,900);
+    width: 100%;
+    min-width: 90%;
+}
+
+.concreteScales:hover{
+    background-color: rgba(0,0,0,.2);
+    box-shadow: 0px 0px 5px 3px #00ccff,
+                    0 0 30px #00ccff,
+                    0 0 60px #00ccff,
+                    0 0 100px #00ccff;
+}
+
+.concreteScales.active{
+    color: black;
+    text-shadow: 0px 0px 2px black;
+    background-color: #00ccff;
+    box-shadow: 0px 0px 5px 3px #00ccff,
+                    0 0 30px #00ccff,
+                    0 0 60px #00ccff,
+                    0 0 100px #00ccff;
+}
+
+
+
+// Contendores
+.itemContainer{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.mat-checkbox {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    width: 180px;
+    font-size: 1em;
+    text-align: center;
+
+    border-radius: 20px;
+    color: black;
+    background-color: white;
+}

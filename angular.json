@@ -1,6 +1,11 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "cli": {
+    "cache": {
+      "enabled": false
+    }
+  },
   "newProjectRoot": "projects",
   "projects": {
     "Starmony-web": {
@@ -76,7 +81,8 @@
               "browserTarget": "Starmony-web:build:production"
             },
             "development": {
-              "browserTarget": "Starmony-web:build:development"
+              "browserTarget": "Starmony-web:build:development",
+              "proxyConfig": "src/proxy.conf.json"    
             }
           },
           "defaultConfiguration": "development"

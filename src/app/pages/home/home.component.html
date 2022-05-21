@@ -1,6 +1,17 @@
-<div fxFlex fxLayout="row" fxLayoutAlign="space-around center" class="container">
-    <mat-card fxFlex fxLayout fxLayoutAlign="center center" class="matCard" routerLink="/analyzer"><a routerLink="/analyzer">Analizar</a></mat-card>
-    <mat-card fxFlex fxLayout fxLayoutAlign="center center" class="matCard" routerLink="/generator"><a routerLink="/generator">Generar</a></mat-card>
-    <mat-card fxFlex fxLayout fxLayoutAlign="center center" class="matCard" routerLink="/recognizer"><a routerLink="/recognizer">Consultar</a></mat-card>
-    <mat-card fxFlex fxLayout fxLayoutAlign="center center" class="matCard" routerLink="/creator"> <a routerLink="/creator">Crear</a></mat-card>        
+<div fxFlex fxLayout="column">
+    <h1>¡Bienvenido a Starmony!</h1>
+    <h2 (change)="changeUser()">¿En que te puedo ayudar {{username}}?</h2>
+
+    <div class="container">
+        <mat-card style="--clr: #00ccff; --i:1;" fxFlex fxLayout fxLayoutAlign="center center" class="matCard" routerLink="/generator"><a routerLink="/generator">Predecir</a></mat-card>
+        <mat-card style="--clr: #22e622; --i:2;" fxFlex fxLayout fxLayoutAlign="center center" class="matCard" (click)="to('/recognizer')"><a (click)="to('/recognizer')">Buscar</a></mat-card>
+        <mat-card style="--clr: #7722e6; --i:3;" fxFlex fxLayout fxLayoutAlign="center center" class="matCard" routerLink="/creator"> <a routerLink="/creator">Crear</a></mat-card>        
+    </div>
+
+    <div class="container">
+        <mat-card style="--clr: #00ccff; --i:1;" fxFlex fxLayout fxLayoutAlign="center center" class="matCard" (click)="to('/collection')"><a (click)="to('/collection')">Colección</a></mat-card>
+        <mat-card style="--clr: #7722e6; --i:3;" fxFlex fxLayout fxLayoutAlign="center center" class="matCard" (click)="cerrarSession()"> <a (click)="cerrarSession()">Cerrar Session</a></mat-card>        
+    </div>
+
+
 </div>
