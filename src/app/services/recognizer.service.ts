@@ -9,6 +9,7 @@ import { Scale } from '../interfaces/scale.interface';
 import { ConcreteInterval } from '../interfaces/concreteInterval.interface';
 import { Progression } from '../interfaces/progression.interface';
 import { ConcreteScale } from '../interfaces/concreteScale.interface';
+import { Tag } from '../interfaces/tag.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class RecognizerService {
 
   public getAllNotes():Observable<any>{
     return this.http.get<Note>(this.endpoint+"/note");
+  }
+
+  public getAllTags():Observable<any>{
+    return this.http.get<Tag>(this.endpoint+"/tag");
   }
 
   public getAllIntervals():Observable<any>{

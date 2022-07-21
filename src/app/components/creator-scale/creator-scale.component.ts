@@ -118,7 +118,7 @@ export class CreatorScaleComponent implements OnInit {
       countSemitones += Number(it); 
     }
 
-    if(countSemitones > 12){
+    if(countSemitones != 12){
       this.validCode = false;
       console.log("Codigo no valido");
       return;

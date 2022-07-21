@@ -1,7 +1,7 @@
 <div fxFlex fxLayout="column start" class="container">
     
     <h2>¿Que Elemento Musical Busca?</h2>
-    <mat-card style="--clr: #f0ff22; --i:0;" class="return" routerLink="/home"><a class="regresar" routerLink="/home">< Atras</a></mat-card>
+    <mat-card (click)="returnPage()" style="--clr: #f0ff22; --i:0;" class="return" routerLink="/home"><a class="regresar" routerLink="/home">< Atras</a></mat-card>
     <div class="containerButtons">
         <mat-card routerLink="/recognizer/chord" style="--clr: #ff22bb; --i:0;" fxFlex fxLayout fxLayoutAlign="center center" class="itemMenu" (click)="selectSearched('chord')" [ngClass]="{'active': isSelectedSearched('chord'), '': !isSelectedSearched('chord')}" ><a>Acorde</a></mat-card>
         <mat-card routerLink="/recognizer/scale" style="--clr: #00ccff; --i:1;" fxFlex fxLayout fxLayoutAlign="center center" class="itemMenu" (click)="selectSearched('scale')" [ngClass]="{'active': isSelectedSearched('scale'), '': !isSelectedSearched('scale')}"><a>Escala</a></mat-card>

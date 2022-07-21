@@ -22,4 +22,8 @@ export class GeneratorService {
   public predictConcreteChord(ids: number[] ):any{
     return this.http.post<any>(this.uri+"/chord/concrete/ia", ids);
   }
+
+  public getConcreteProgressionsWithCScaleAndTag(idConcretescale: number, idTag: number ):any{
+    return this.http.get<any>(this.uri+"/progression/concrete/scale/concrete/"+idConcretescale+"/tag/"+idTag);
+  }
 }

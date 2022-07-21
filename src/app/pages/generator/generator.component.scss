@@ -11,34 +11,7 @@
     height: 100%;
 }
 
-a {
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
-    z-index: 1;
-}
 
-.return{
-    position: absolute;
-
-    margin-left: 10px;
-    margin-top:10px;
-
-    height: 20px;
-    width: 50px;
-
-    overflow: hidden;
-    align-items: center;
-    background-color: rgba($color: #eb3232, $alpha: 1.0);
-    
-    transition: 1s;
-}
-
-.return:hover{
-    box-shadow: 0 5px 45px rgb(248, 0, 0);
-    background-color: rgba($color: #e21d1d, $alpha: 1.0);
-    cursor: pointer;
-}
 
 h1{
     margin-top: 50px;    
@@ -75,7 +48,61 @@ h4{
 
 
 
+.genres{
+    margin: 10px;
+    height: 40px;
+    background-color: rgba(255,255,255,.1);
+    box-shadow: 0px 0px 5px 3px #c8ff00;
+    color: mat-contrast($palette-primary,900);
+    min-width: min-content;
+}
 
+.genres:hover{
+    background-color: rgba(0,0,0,.2);
+    box-shadow: 0px 0px 5px 3px #c8ff00,
+                    0 0 30px #c8ff00,
+                    0 0 60px #c8ff00,
+                    0 0 100px #c8ff00;
+}
+
+.genres.active{
+    color: black;
+    text-shadow: 0px 0px 2px black;
+    background-color: #c8ff00;
+    box-shadow: 0px 0px 5px 3px #c8ff00,
+                    0 0 30px #c8ff00,
+                    0 0 60px #c8ff00,
+                    0 0 100px #c8ff00;
+}
+
+
+.concreteProgressions{
+    margin: 10px;
+    height: 40px;
+    background-color: rgba(255,255,255,.1);
+    box-shadow: 0px 0px 5px 3px #7722e6;
+    color: mat-contrast($palette-primary,900);
+    width: 100%;
+    min-width: 90%;
+}
+
+.concreteProgressions:hover{
+    background-color: rgba(0,0,0,.2);
+    box-shadow: 0px 0px 5px 3px #7722e6,
+                    0 0 30px #7722e6,
+                    0 0 60px #7722e6,
+                    0 0 100px #7722e6;
+}
+
+.concreteProgressions.active{
+    color: black;
+    text-shadow: 0px 0px 2px black;
+    background-color: #7722e6;
+    box-shadow: 0px 0px 5px 3px #7722e6,
+                    0 0 30px #7722e6,
+                    0 0 60px #7722e6,
+                    0 0 100px #7722e6;
+}
 
 
 .concreteChords{
@@ -138,6 +165,84 @@ h4{
 
 
 
+.concreteScales{
+    margin: 10px;
+    height: 40px;
+    background-color: rgba(255,255,255,.1);
+    box-shadow: 0px 0px 5px 3px #00ccff;
+    color: mat-contrast($palette-primary,900);
+    width: 100%;
+    min-width: 90%;
+}
+
+.concreteScales:hover{
+    background-color: rgba(0,0,0,.2);
+    box-shadow: 0px 0px 5px 3px #00ccff,
+                    0 0 30px #00ccff,
+                    0 0 60px #00ccff,
+                    0 0 100px #00ccff;
+}
+
+.concreteScales.active{
+    color: black;
+    text-shadow: 0px 0px 2px black;
+    background-color: #00ccff;
+    box-shadow: 0px 0px 5px 3px #00ccff,
+                    0 0 30px #00ccff,
+                    0 0 60px #00ccff,
+                    0 0 100px #00ccff;
+}
+
+.concreteChord{
+    margin: 10px;
+    height: 40px;
+    background-color: rgba(255,255,255,.1);
+    box-shadow: 0px 0px 5px 3px #ff22bb;
+    color: mat-contrast($palette-primary,900);
+    width: 100%;
+    min-width: 90%;
+}
+
+.concreteChord:hover{
+    background-color: rgba(0,0,0,.2);
+    box-shadow: 0px 0px 5px 3px #ff22bb,
+                    0 0 30px #ff22bb,
+                    0 0 60px #ff22bb,
+                    0 0 100px #ff22bb;
+}
+
+.concreteChord.active{
+    color: black;
+    text-shadow: 0px 0px 2px black;
+    background-color: #ff22bb;
+    box-shadow: 0px 0px 5px 3px #ff22bb,
+                    0 0 30px #ff22bb,
+                    0 0 60px #ff22bb,
+                    0 0 100px #ff22bb;
+}
+
+
+
+.buscar{
+    margin: 20px;
+    width: 200px;
+    height: 40px;
+    background-color: rgba(255,255,255,.1);
+    box-shadow: 0px 0px 5px 3px #ff22bb;
+    animation: colorize 2s linear infinite;
+    color: mat-contrast($palette-primary,900);
+}
+
+.buscar:hover{
+    background-color: rgba(0,0,0,.2);
+    box-shadow: 0px 0px 5px 3px #fc1c1c,
+                    0 0 30px #fc1c1c,
+                    0 0 60px #fc1c1c,
+                    0 0 100px #fc1c1c;
+}
+
+
+
 // Contendores
 .itemContainer{
     width: 100%;
@@ -156,4 +261,34 @@ h4{
     border-radius: 20px;
     color: black;
     background-color: white;
+}
+
+
+
+.return{
+    margin-left: 10px;
+    margin-top:10px;
+
+    height: 20px;
+    width: 50px;
+
+    overflow: hidden;
+    align-items: center;
+    background-color: rgba($color: #eb3232, $alpha: 1.0);
+    
+    transition: 1s;
+}
+
+.return:hover{
+    box-shadow: 0 5px 45px rgb(248, 0, 0);
+    background-color: rgba($color: #e21d1d, $alpha: 1.0);
+    cursor: pointer;
+}
+
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    z-index: 1;
 }

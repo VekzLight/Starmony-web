@@ -274,9 +274,10 @@ export class RecognizerProgressionComponent implements OnInit {
       this.concreteOriginScale.push(resp);
 
       this.idOriginScale = resp.id_concrete_scale;
-    
+      
 
       console.log(this.concreteOriginScale[0]);
+      this.gradesOfScale = [];
       this.analizerService.getConcreteGradesOfConcretescale(resp).subscribe((resp2: ConcreteGradeScales)=>{
         for(var index in resp2.concreteGrades){
           this.gradesOfScale.push(resp2.concreteGrades[index]);
@@ -286,6 +287,7 @@ export class RecognizerProgressionComponent implements OnInit {
   }
 
   public unanalizeProgression():void{
+    
     this.isAnalize = false;
   }
 

@@ -14,7 +14,7 @@ export class RecognizerComponent implements OnInit {
   chords:Chord[] = [];
   concretechords:ConcreteChord[] = [];
 
-  searched:String = "";
+  searched:String = localStorage.getItem("page") as string;
 
   constructor(private router: Router) { }
 
@@ -23,7 +23,7 @@ export class RecognizerComponent implements OnInit {
   }
 
   public selectSearched(searched: string):void{
-    this.searched=searched;
+    localStorage.setItem("page", searched);
     console.log(this.searched)
   } 
 
@@ -31,4 +31,8 @@ export class RecognizerComponent implements OnInit {
     return this.searched==searched;
   }
 
+
+  public returnPage():void{
+    localStorage.setItem("page", "home");
+  }
 }
