@@ -3,95 +3,26 @@
 
 :host{
     height: 100%;
-    background-color: mat-color($palette-primary,900);
 }
 
-h1{
-    margin-top: 50px;    
-    font-size: 3em;
-    text-align: center;
-    color: mat-color($palette-accent,900)
-}
-
-h2{
-    margin-top: 20px;  
-    font-size: 2em;
-    text-align: center;
-    color: mat-contrast($palette-primary,900)
-}
-
-.container{
-    margin-top: 50px;
-    display: flex;
-    flex-direction: row;
-}
-
-.matCard{
-    margin-left: 10px;
-    margin-right:10px;
-
-    height: 250px;
-    width: 100px;
-
-    overflow: hidden;
-    align-items: center;
-    background-color: mat-color($palette-primary,900);
-    
-    transition: 1s;
-}
-
-.matCard:hover{
-    background-color: var(--clr);
-    box-shadow: 0 0 10px var(--clr),
-                0 0 30px var(--clr),
-                0 0 60px var(--clr),
-                0 0 100px var(--clr);
-
-    cursor: pointer;
-}
-
-.matCard:hover::before{
+.main-container {
     width: 100%;
+    height: 100%;
 }
 
-.matCard::before{
-    content: '';
-    position: absolute;
-    width: 110%;
-    height: 40px;
-    background-color: var(--clr);
-    transition: 1s;
-    animation: animate 2s linear infinite;
-    animation-delay: calc(0.33s * var(--i));
+.side-nav{
+    width: 200px;
 }
 
-
-@keyframes animate{
-    0%{ transform: rotate(0deg);}
-    100%{ transform: rotate(360deg);}
+.header{
+    height: 100px;
 }
 
-.matCard::after{
-    content: '';
-    position: absolute;
-    inset: 4px;
-    background-color: mat-color($palette-primary,900);
-    transition: 0.5s;
+.search{
+    height: 100px;
 }
 
-.matCard:hover::after{
-    background-color: var(--clr);
-}
-
-a {
-    text-decoration: none;
-    color: white;
-    font-size: 2rem;
-    z-index: 1;
-}
-
-@media (max-width: 900px) {
-    a {
-        font-size: 1rem;
-    }
+.logo{
+    width: 150px;
+    height: 100px;
 }

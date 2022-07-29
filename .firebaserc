@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "starmony-1116"
+  },
+  "targets": {
+    "starmony-1116": {
+      "hosting": {
+        "Starmony-web": [
+          "starmony"
+        ]
+      }
+    }
+  }
+}

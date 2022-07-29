@@ -140,14 +140,14 @@ $accent-unicornio: (
 $palette-primary:   mat.define-palette($primary-color);
 $palette-accent:    mat.define-palette($accent-color);
 $palette-secondary: mat.define-palette($secondary-color);
-$palette-unicornio:      mat.define-palette($accent-unicornio);
+$palette-unicornio: mat.define-palette($accent-unicornio);
 
 $theme: mat.define-light-theme((
     color : (
-        primary: $palette-primary,
-        secondary: $palette-accent,
-        accent: $palette-secondary,
-        unicornio: $palette-unicornio,
+        primary:    $palette-primary,
+        secondary:  $palette-accent,
+        accent:     $palette-secondary,
+        unicornio:  $palette-unicornio,
     )
 ));
 

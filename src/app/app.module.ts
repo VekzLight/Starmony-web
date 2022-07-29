@@ -22,10 +22,14 @@ import { RecognizerChordComponent } from './components/recognizer-chord/recogniz
 import { RecognizerScaleComponent } from './components/recognizer-scale/recognizer-scale.component';
 import { RecognizerIntervalComponent } from './components/recognizer-interval/recognizer-interval.component';
 import { RecognizerProgressionComponent } from './components/recognizer-progression/recognizer-progression.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CollectionComponent } from './pages/collection/collection.component';
 import { CreatorScaleComponent } from './components/creator-scale/creator-scale.component';
 import { CreatorProgressionComponent } from './components/creator-progression/creator-progression.component';
+import { SeekerComponent } from './components/seeker/seeker.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,8 @@ import { CreatorProgressionComponent } from './components/creator-progression/cr
     RecognizerProgressionComponent,
     CollectionComponent,
     CreatorScaleComponent,
-    CreatorProgressionComponent
+    CreatorProgressionComponent,
+    SeekerComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,10 @@ import { CreatorProgressionComponent } from './components/creator-progression/cr
     LayoutModule,
     FlexLayoutModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth())
   ],
   providers: [],
   bootstrap: [AppComponent]

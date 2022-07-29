@@ -1,0 +1,89 @@
+
+<div fxFlex fxLayout="column" class="main-container">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="search-container">
+      <form class="search-form">
+          <mat-form-field class="search-full-width" appearance="fill">
+            <mat-label>Nombre / simbolo</mat-label>
+            
+            <input type="text"
+                    placeholder="Selecciona Uno"
+                    aria-label="Nombre"
+                    matInput
+                    [formControl]="searchControl"
+                    [matAutocomplete]="auto">
+            
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+
+          </mat-form-field>
+          <button mat-icon-button>
+            <mat-icon>arrow_forward_ios</mat-icon>
+          </button>
+      </form>
+
+      
+
+      <mat-slide-toggle class="matSlide" (click)="changeType()">{{typeFilter}}</mat-slide-toggle>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxLayoutAlign="space-around center" class="filter-by-element-container">
+    <button class="btn-filter-element" mat-button> Acordes </button>
+    <button class="btn-filter-element" mat-button> Escalas </button>
+    <button class="btn-filter-element" mat-button> Progresiones </button>
+    <button class="btn-filter-element" mat-button> Intervalos </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row wrap" fxLayoutAlign="space-around center" class="note-container">
+    <button class="tonic"
+        (click)="selectNote(note)" 
+        [ngClass]="{'active': tonic == note.id, '': tonic != note.id}" 
+        *ngFor="let note of notes" 
+        mat-button> 
+        {{note.symbol}} 
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxLayoutAlign="space-around center" class="filtar-by-options-container">
+    <mat-form-field appearance="fill">
+      <mat-label>notas minimas</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let min of [1,2,3,4,5,6,7,8,8,10,11,12]" [value]="min"> {{min}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>notas maximas</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let max of [1,2,3,4,5,6,7,8,8,10,11,12]" [value]="max"> {{max}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxLayoutAlign="start center" class="order-container">
+    <h4>Orden</h4>
+    <mat-form-field appearance="fill">
+      <mat-label>Tonica</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let note of notesSelected" [value]="note.id"> {{note.symbol}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div #orderAddContainer></div>
+
+    <button mat-icon-button (click)="addOrder()">
+      <mat-icon>add_circle_outline</mat-icon>
+    </button>
+  </div>
+
+</div>

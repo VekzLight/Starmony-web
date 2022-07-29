@@ -1,17 +1,81 @@
-<div fxFlex fxLayout="column">
-    <h1>¡Bienvenido a Starmony!</h1>
-    <h2 (change)="changeUser()">¿En que te puedo ayudar {{username}}?</h2>
+<mat-drawer-container class="main-container">
+    <mat-drawer class="side-nav" mode="side" opened>
 
-    <div class="container">
-        <mat-card style="--clr: #00ccff; --i:1;" fxFlex fxLayout fxLayoutAlign="center center" class="matCard" routerLink="/generator"><a routerLink="/generator">Generar</a></mat-card>
-        <mat-card style="--clr: #22e622; --i:2;" fxFlex fxLayout fxLayoutAlign="center center" class="matCard" (click)="to('/recognizer')"><a (click)="to('/recognizer')">Buscar</a></mat-card>
-        <mat-card style="--clr: #7722e6; --i:3;" fxFlex fxLayout fxLayoutAlign="center center" class="matCard" routerLink="/creator"> <a routerLink="/creator">Crear</a></mat-card>        
-    </div>
+        <!--Header{ Logo y Opciones }-->
+        <div fxFlex fxLayout="column" fxLayoutAlign="start center" class="sub-container">
+            <div fxLayoutAlign="space-around center" class="header">
+                <img class="logo" src="https://logoeps.com/wp-content/uploads/2013/04/pauta-musica-vector.png">
+                
+                <button mat-icon-button [matMenuTriggerFor]="menuProfile" >
+                    <mat-icon>menu</mat-icon>
+                </button>
 
-    <div class="container">
-        <mat-card style="--clr: #00ccff; --i:1;" fxFlex fxLayout fxLayoutAlign="center center" class="matCard" (click)="to('/collection')"><a (click)="to('/collection')">Colección</a></mat-card>
-        <mat-card style="--clr: #7722e6; --i:3;" fxFlex fxLayout fxLayoutAlign="center center" class="matCard" (click)="cerrarSession()"> <a (click)="cerrarSession()">Cerrar Session</a></mat-card>        
-    </div>
+                <mat-menu #menuProfile="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>account_circle</mat-icon>
+                        <span>Perfil</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item>
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>Salir de la App</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item>
+                        <mat-icon>logout</mat-icon>
+                        <span>Cerrar Sesion</span>
+                    </button>
+                </mat-menu>
+            </div>
 
+            <!--Search{ busqueda y coleccion }-->
+            <div fxLayout="column" fxLayoutAlign="start center" class="search">
+                <button routerLink="/home/seeker" mat-button> Busqueda <mat-icon>search</mat-icon></button>
+                <button routerLink="/home/collection" mat-button> Colección <mat-icon>collections</mat-icon></button>
+            </div>
 
-</div>
+            <!--Herramientas{ Analizar y Generar }-->
+            <div fxLayout="column" fxLayoutAlign="start center" class="search">
+                <button mat-button [matMenuTriggerFor]="menuAnalizar" disabled>
+                    Analizar
+                    <mat-icon>arrow_forward_ios</mat-icon>
+                </button>
+                <mat-menu #menuAnalizar="matMenu" xPosition="after">
+                    <button mat-menu-item>
+                        <span>Estructura</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item>
+                        <span>Uso</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item>
+                        <span>Todo</span>
+                    </button>
+                </mat-menu>
+
+                <button mat-button [matMenuTriggerFor]="menuGenerar" disabled>
+                    Generar
+                    <mat-icon>arrow_forward_ios</mat-icon>
+                </button>
+                <mat-menu #menuGenerar="matMenu" xPosition="after">
+                    <button mat-menu-item>
+                        <span>Acordes</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item>
+                        <span>Escalas</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item>
+                        <span>Progresiones</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+            
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

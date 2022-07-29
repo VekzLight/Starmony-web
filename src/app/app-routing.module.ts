@@ -16,9 +16,14 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { CollectionComponent } from './pages/collection/collection.component';
 import { CreatorScaleComponent } from './components/creator-scale/creator-scale.component';
 import { CreatorProgressionComponent } from './components/creator-progression/creator-progression.component';
+import { SeekerComponent } from './components/seeker/seeker.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent},
+  { path: 'home', component: HomeComponent,
+      children:[
+        { path: 'seeker', component: SeekerComponent},
+        { path: 'collection', component: CollectionComponent}
+      ]},
   { path: 'login', component: LoginComponent},
   { path: 'generator', component: GeneratorComponent},
   { path: 'recognizer', component: RecognizerComponent,

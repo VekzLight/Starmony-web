@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input  } from '@angular/core';
+import { MenuPositionX } from '@angular/material/menu';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit{
-
   public username: String = localStorage.getItem("username") as string;
 
   constructor(private router:Router) {
@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit{
     this.router.navigate(["/login"]);
   }
 
-  
   public to(component: string):boolean{
     this.router.navigate([component]);
     return false;

@@ -14,6 +14,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 @NgModule({
   declarations: [],
@@ -31,7 +36,11 @@ import {MatMenuModule} from '@angular/material/menu';
     MatPaginatorModule,
     MatCheckboxModule,
     ScrollingModule,
-    MatMenuModule
+    MatMenuModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSlideToggleModule
   ],
   exports:[
     MatToolbarModule,
@@ -46,7 +55,11 @@ import {MatMenuModule} from '@angular/material/menu';
     MatExpansionModule,
     MatCheckboxModule,
     ScrollingModule,
-    MatMenuModule
+    MatMenuModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSlideToggleModule
   ]
 })
 export class MaterialModule { }
