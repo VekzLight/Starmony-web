@@ -30,6 +30,8 @@ import { SeekerComponent } from './components/seeker/seeker.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import { OrderSelectElementComponent } from './components/order-select-element/order-select-element.component';
+import { OrderSelectorDirective } from './directives/order-selector.directive';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     CollectionComponent,
     CreatorScaleComponent,
     CreatorProgressionComponent,
-    SeekerComponent
+    SeekerComponent,
+    OrderSelectElementComponent,
+    OrderSelectorDirective
   ],
   imports: [
     BrowserModule,

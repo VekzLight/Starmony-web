@@ -8,6 +8,29 @@
     margin-left: 1%;
 }
 
+table {
+    width: 100%;
+}
+  
+
+td, th {
+    width: 25%; 
+}
+
+.mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+    border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+    font-weight: bold;
+}
+
 @media (min-width: 970px) {
 
 }
