@@ -1,0 +1,51 @@
+.mat-checkbox{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.elementContainer{
+    width: max-content;
+    border: 1px black;
+}
+
+.element{
+    width: 150px;
+}
+
+.element:hover{
+    cursor: pointer;
+    border-color: currentColor;
+    font: bold;
+}
+
+.element.selected{
+    background-color: pink;
+    color: white;
+}
+
+.elementLarge{
+    width: min-content;
+}
+
+.elementLarge:hover{
+    cursor: pointer;
+    border-color: currentColor;
+    font: bold;
+}
+
+.elementLarge.selected{
+    background-color: pink;
+    color: white;
+}
+
+.config-menu{
+    border-style: none none none solid;
+    border-width: 1px;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+.config-button{
+    margin-left: 5px;
+    width: 100%;
+}

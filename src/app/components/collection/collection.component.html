@@ -1,0 +1,129 @@
+<app-starmony-header [back]="true"></app-starmony-header>
+
+<mat-divider></mat-divider>
+
+<div class="select-elements-container">
+    <app-starmony-header [back]="false"></app-starmony-header>
+    <mat-divider></mat-divider>
+    <h2>Elementos Seleccionados</h2>
+    <div class="example-action-buttons">
+      </div>
+      <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel [disabled]="elementsContainerService.userConcreteChords.length == 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Acordes
+                </mat-panel-title>
+                <mat-panel-description>
+                {{ elementsContainerService.userConcreteChords.length }} elementos.
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <div class="elementsContainer">
+                    <div class="elementContainer" (click)="selectConcreteChord(element.id_concrete_chord)" fxLayout="row" fxLayoutAlign="start center" *ngFor="let element of userConcreteChords">
+                        <button class="elementLarge"
+                                [ngClass]="{
+                                    'selected': idConcreteChordSelected == element.id_concrete_chord,
+                                    '': idConcreteChordSelected != element.id_concrete_chord
+                                }"
+                                mat-stroked-button>
+                            {{ element.tonic.symbol }}{{ element.symbol }}
+                        </button>
+                        
+                        <div fxLayout="column" fxLayoutAlign="start center" class="config-menu" *ngIf=" idConcreteChordSelected == element.id_concrete_chord">
+                            
+                            <button class="config-button" (click)="analizeChord(element, true)" mat-raised-button>Analisis</button>
+                            <button class="config-button" mat-raised-button>Eliminar de la Colección</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+
+        <mat-expansion-panel [disabled]="elementsContainerService.userConcreteScales.length == 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Escalas
+                </mat-panel-title>
+                <mat-panel-description>
+                {{ elementsContainerService.userConcreteScales.length }} elementos.
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="elementsContainer">
+                <div class="elementContainer"  fxLayout="row" fxLayoutAlign="start center" *ngFor="let element of userConcreteScales">
+                    <button class="elementLarge"
+                            [ngClass]="{
+                                'selected': idConcreteScaleSelected == element.id_concrete_scale,
+                                '': idConcreteScaleSelected != element.id_concrete_scale
+                            }"
+                            (click)="selectConcreteScale(element.id_concrete_scale)"
+                            mat-stroked-button>
+                        {{ element.tonic.symbol }} {{ element.symbol }}
+                    </button>
+                                            
+                    <div class="config-menu" *ngIf=" idConcreteScaleSelected == element.id_concrete_scale">
+                        <button class="config-button" (click)="analizeScale(element, true)" mat-raised-button>Analizar</button>
+                        <button class="config-button" mat-raised-button>Añadir a Colección</button>
+                    </div>
+
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [disabled]="elementsContainerService.userConcreteProgressions.length == 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Progresiones
+                </mat-panel-title>
+                <mat-panel-description>
+                {{ elementsContainerService.userConcreteProgressions.length }} elementos.
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="elementsContainer">
+                <div class="elementContainer" (click)="selectConcreteProgression(element.id_concrete_progression)" fxLayout="row" fxLayoutAlign="start center" *ngFor="let element of userConcreteProgressions">
+                    <button class="elementLarge"
+                            [ngClass]="{
+                                'selected': idConcreteProgressionSelected == element.id_concrete_progression,
+                                '': idConcreteChordSelected != element.id_concrete_progression
+                            }"
+                            mat-stroked-button>
+                        {{ element.symbol }}  {{ getGrades(element.concreteGrades)}}
+                    </button>
+                                                                
+                    <div class="config-menu" *ngIf=" idConcreteProgressionSelected == element.id_concrete_progression">
+                        <button class="config-button" (click)="analizeProgression(element, true)" mat-raised-button>Analizar</button>
+                        <button class="config-button" mat-raised-button>Añadir a Colección</button>
+                    </div>
+
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        
+        <mat-expansion-panel [disabled]="elementsContainerService.userConcreteIntervals.length == 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Intervalos
+                </mat-panel-title>
+                <mat-panel-description>
+                {{ elementsContainerService.userConcreteIntervals.length }} elementos.
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="elementsContainer">
+                <div class="elementContainer" (click)="selectConcreteInterval(element.id_concrete_interval)" fxLayout="row" fxLayoutAlign="start center" *ngFor="let element of userConcreteIntervals">
+                    <button class="elementLarge"
+                            [ngClass]="{
+                                'selected': idConcreteIntervalSelected == element.id_concrete_interval,
+                                '': idConcreteIntervalSelected != element.id_concrete_interval
+                            }"
+                            mat-stroked-button>
+                        {{element.name}} {{element.firstNote.symbol}} - {{element.lastNote.symbol}}
+                    </button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+        
+      </mat-accordion>
+</div>

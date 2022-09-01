@@ -1,35 +1,12 @@
-@import "~@angular/material/theming";
-@import '../../../assets/styles/dracula.scss';
-
-
-.first{
-    width: 98%;
-    margin-top: 10px;
-    margin-left: 1%;
+.search-form, .button-back{
+    margin: 5px;
 }
 
-table {
-    width: 100%;
-}
-  
-
-td, th {
-    width: 25%; 
+.overlay-front{
+    background-color: white;
+    z-index: 102;
 }
 
-.mat-row .mat-cell {
-    border-bottom: 1px solid transparent;
-    border-top: 1px solid transparent;
-    cursor: pointer;
-}
-
-.mat-row:hover .mat-cell {
-    border-color: currentColor;
-}
-
-.demo-row-is-clicked {
-    font-weight: bold;
-}
 
 @media (min-width: 970px) {
 

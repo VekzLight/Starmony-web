@@ -1,0 +1,9 @@
+<app-starmony-header [back]="true"></app-starmony-header>
+
+<mat-divider></mat-divider>
+
+<app-analizer-chord *ngIf=" signalsService.typeElementAnalized == 'chord'"></app-analizer-chord>
+<app-analizer-progression *ngIf=" signalsService.typeElementAnalized == 'progression'"></app-analizer-progression>
+<app-analizer-scale *ngIf=" signalsService.typeElementAnalized == 'scale'"></app-analizer-scale>
+
+

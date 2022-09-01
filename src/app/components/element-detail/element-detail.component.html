@@ -1,0 +1,116 @@
+<app-starmony-header [back]="true"></app-starmony-header>
+
+<mat-divider></mat-divider>
+
+<div    fxLayout="column"
+        fxLayoutAlign="center start"
+        class="container" 
+        [ngClass]="{
+            'notDisplay': signalsService.relatedAnalized != 'scale',
+            '':  signalsService.relatedAnalized == 'scale'
+        }">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title *ngIf=" elementsContainerService.chordAnalizedResp.exist "> El acorde de "{{elementsContainerService.chordAnalized.tonic.symbol }}  {{elementsContainerService.chordAnalized.name}}" es el {{ elementsContainerService.scaleDetail.id != -1 ? signalsService.grades[elementsContainerService.chordAnalizedResp.concreteScalesIds[elementsContainerService.scaleDetail.id_concrete_scale]] : "" }} grado de la escala de "{{ elementsContainerService.scaleDetail.id != -1 ? elementsContainerService.scaleDetail.tonic.symbol :"" }} {{ elementsContainerService.scaleDetail.id != -1 ? elementsContainerService.scaleDetail.symbol : "" }}"</mat-card-title>
+            
+        </mat-card-header>
+        <canvas class="canvas-detail" #detailCanvasScale></canvas>
+        <mat-card-content>
+            <h2>Información Sobre la Escala</h2>
+            <ul>
+                <li>Contiene {{ elementsContainerService.scaleDetail.id != -1 ? getTipesChords(elementsContainerService.scaleDetail) :"" }}</li>
+                <li>Su Codigo de semitonos es {{ elementsContainerService.scaleDetail.id != -1 ? elementsContainerService.scaleDetail.code :"" }}</li>
+                <li>Es considerada una escala {{ elementsContainerService.scaleDetail.id != -1 ? group(elementsContainerService.scaleDetail.id):"" }}</li>
+            </ul>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div    fxLayout="column" 
+        fxLayoutAlign="center start" 
+        class="container" 
+        [ngClass]="{
+            'notDisplay': signalsService.relatedAnalized != 'interval',
+            '':  signalsService.relatedAnalized == 'interval'
+        }">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title> El acorde de "{{ elementsContainerService.chordAnalized.tonic.symbol }}  {{elementsContainerService.chordAnalized.name}}" contiene un intervalo de "{{ elementsContainerService.intervalDetail.id != -1 ? elementsContainerService.intervalDetail.name : "" }}" entre {{ elementsContainerService.intervalDetail.id != -1 ? elementsContainerService.intervalDetail.firstNote.symbol :""}} y {{ elementsContainerService.intervalDetail.id != -1 ? elementsContainerService.intervalDetail.lastNote.symbol : "" }} </mat-card-title>
+            
+        </mat-card-header>
+        
+        <mat-card-content>
+            <h2>Información Sobre El Acorde</h2>
+            <ul>
+                
+                <li> Es un acorde de {{getTypeChord(elementsContainerService.chordAnalized)}} </li>
+            </ul>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+
+<!-- TODO: Agregar las posiciones en las que se encuentra el acorde en la progression concreta, se puede copiar del elemento analizer component, ya que ahi se utiliza antes de la sellecion de la progresion pura -->
+
+
+<div    fxLayout="column" 
+        fxLayoutAlign="center start" 
+        class="container" 
+        [ngClass]="{
+            'notDisplay': ((signalsService.relatedAnalized != 'progression') || (signalsService.typeElementAnalized != 'chord')),
+            '':  (signalsService.relatedAnalized == 'progression') && (signalsService.typeElementAnalized == 'chord')
+        }">
+    <mat-card>
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title> La progresion "{{ elementsContainerService.progressionDetail.symbol }}" sobre la escala "{{ elementsContainerService.scaleDetail.tonic.symbol }} {{  elementsContainerService.scaleDetail.symbol }}" usa el acorde "{{ elementsContainerService.progressionDetail.id != -1 ? elementsContainerService.chordAnalized.tonic.symbol :""}}  {{elementsContainerService.chordAnalized.name}}" en la {{ searchProgression(elementsContainerService.progressionDetail.id_concrete_progression) }} </mat-card-title>
+           
+        </mat-card-header>
+        <canvas class="canvas-detail" #detailCanvasProgression></canvas>
+        <mat-card-content>
+            <h2>Información Sobre La Progresión</h2>
+            <ul>
+                <li>
+                    Se utiliza comunmente en los generos musicales:
+                    <ol *ngFor="let tag of getTagsProgressionsOf( elementsContainerService.progressionDetail.id )">  - {{ tag.name }} </ol> 
+                </li>
+                <li *ngFor="let chordType of getTipesChordsList(elementsContainerService.scaleDetail)"> Contiene {{ chordType }}</li>
+            </ul>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+<div    fxLayout="column" 
+        fxLayoutAlign="center start" 
+        class="container" 
+        [ngClass]="{
+            'notDisplay': (signalsService.relatedAnalized != 'progression') || (signalsService.typeElementAnalized != 'scale'),
+            '':  signalsService.relatedAnalized == 'progression' && (signalsService.typeElementAnalized == 'scale')
+        }">
+        
+    <mat-card>
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title> Progresion "{{ elementsContainerService.progressionDetail.symbol }}" sobre la escala "{{ elementsContainerService.scaleDetail.tonic.symbol }} {{  elementsContainerService.scaleDetail.symbol }}" </mat-card-title>
+           
+        </mat-card-header>
+        <canvas class="canvas-detail" #detailCanvasProgressionScale></canvas>
+        <mat-card-content>
+            <h2>Información Sobre La Progresión</h2>
+            <ul>
+                <li>
+                    <div>
+                        Se utiliza comunmente en los generos musicales:
+                        <ol *ngFor="let tag of getTagsProgressionsOf( elementsContainerService.progressionDetail.id )">  - {{ tag.name }} </ol> 
+                    </div>
+                    
+                </li>
+                <li *ngFor="let chordType of getTipesGradesList(elementsContainerService.progressionDetail)"> Contiene {{ chordType }}</li>
+            </ul>
+        </mat-card-content>
+    </mat-card>
+</div>

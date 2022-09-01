@@ -1,0 +1,30 @@
+<header fxLayoutAlign="space-between center">
+    <img class="logo" src="https://logoeps.com/wp-content/uploads/2013/04/pauta-musica-vector.png">
+
+    <div class="button-container">
+        <button [routerLink]="['/contact']" mat-stroked-button color="primary">Contacto</button>
+        <button [routerLink]="['/login', 'inicio']" mat-raised-button color="primary">Inicio de sesion</button>
+        <button [routerLink]="['/login', 'registrar']" mat-raised-button color="primary">Registrarse</button>
+    </div>
+</header>
+
+<main>
+    <div fxLayout="column" fxLayoutAlign="center center">
+        <h1 class="title">Starmony</h1>
+        <p>Starmony es un conjunto de herramientas para el analisis y generacion de elementos musicales.</p>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
+        <section fxLayout="column" fxLayoutAlign="center center">
+            <h2>Analizador</h2>
+            <p>El Analizador permite ...</p>
+        </section>
+        <section fxLayout="column" fxLayoutAlign="center center">
+            <h2>Generador</h2>
+            <p>El generador permite permite ...</p>
+        </section>
+    </div>
+    
+</main>

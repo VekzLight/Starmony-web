@@ -1,0 +1,116 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$md-primary: (
+    50 : #fff9fb,
+    100 : #feeff6,
+    200 : #fee5f0,
+    300 : #fedaea,
+    400 : #fdd2e6,
+    500 : #fdcae1,
+    600 : #fdc5dd,
+    700 : #fcbdd9,
+    800 : #fcb7d5,
+    900 : #fcabcd,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-secondary: (
+    50 : #f0f6fe,
+    100 : #dae9fc,
+    200 : #c2dbfa,
+    300 : #a9ccf7,
+    400 : #96c1f6,
+    500 : #84b6f4,
+    600 : #7caff3,
+    700 : #71a6f1,
+    800 : #679eef,
+    900 : #548eec,
+    A100 : #ffffff,
+    A200 : #e1f0ff,
+    A400 : #c7e2ff,
+    A700 : #b8dbff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-tertiary: (
+    50 : #effbef,
+    100 : #d6f5d6,
+    200 : #bbeebb,
+    300 : #a0e7a0,
+    400 : #8be28b,
+    500 : #77dd77,
+    600 : #6fd96f,
+    700 : #64d464,
+    800 : #5acf5a,
+    900 : #47c747,
+    A100 : #f4fff2,
+    A200 : #beffb5,
+    A400 : #a8ff9c,
+    A700 : #9aff8c,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$palette-primary:   mat.define-palette($md-primary);
+$palette-secondary:    mat.define-palette($md-secondary);
+$palette-tertiary: mat.define-palette($md-tertiary);
+
+$theme: mat.define-light-theme((
+    color : (
+        primary:    $palette-primary,
+        accent:  $palette-secondary,
+        warn:   $palette-tertiary,
+    )
+));
+
+@include mat.all-component-themes($theme);

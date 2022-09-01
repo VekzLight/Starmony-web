@@ -19,7 +19,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [],
@@ -42,7 +43,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatInputModule,
     MatFormFieldModule,
     MatSlideToggleModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressSpinnerModule,
+    MatSortModule
   ],
   exports:[
     MatToolbarModule,
@@ -62,7 +65,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatInputModule,
     MatFormFieldModule,
     MatSlideToggleModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressSpinnerModule,
+    MatSortModule
   ]
 })
 export class MaterialModule { }

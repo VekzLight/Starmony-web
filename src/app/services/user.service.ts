@@ -1,6 +1,11 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http'
 import { User } from '../interfaces/user.interface';
+import { Observable } from 'rxjs';
+import { ConcreteInterval } from '../interfaces/concreteInterval.interface';
+import { ConcreteChord } from '../interfaces/concreteChord.interface';
+import { ConcreteScale } from '../interfaces/concreteScale.interface';
+import { ConcreteProgression } from '../interfaces/concreteProgression.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -72,19 +77,19 @@ export class UserService {
 
   
 
-  public getAllConcreteIntervals():any{
-    return this.http.get<any>(this.endpoint + "/interval", { headers: this.getHeader(localStorage.getItem('token') as string) });
+  public getAllConcreteIntervals():Observable<ConcreteInterval[]>{
+    return this.http.get<ConcreteInterval[]>(this.endpoint + "/interval", { headers: this.getHeader(localStorage.getItem('token') as string) });
   }
 
-  public getAllConcreteChords():any{
-    return this.http.get<any>(this.endpoint + "/chord", { headers: this.getHeader(localStorage.getItem('token') as string) });
+  public getAllConcreteChords():Observable<ConcreteChord[]>{
+    return this.http.get<ConcreteChord[]>(this.endpoint + "/chord", { headers: this.getHeader(localStorage.getItem('token') as string) });
   }
 
-  public getAllConcreteScales():any{
-    return this.http.get<any>(this.endpoint + "/scale", { headers: this.getHeader(localStorage.getItem('token') as string) });
+  public getAllConcreteScales():Observable<ConcreteScale[]>{
+    return this.http.get<ConcreteScale[]>(this.endpoint + "/scale", { headers: this.getHeader(localStorage.getItem('token') as string) });
   }
 
-  public getAllConcreteProgressions():any{
-    return this.http.get<any>(this.endpoint + "/progression", { headers: this.getHeader(localStorage.getItem('token') as string) });
+  public getAllConcreteProgressions():Observable<ConcreteProgression[]>{
+    return this.http.get<ConcreteProgression[]>(this.endpoint + "/progression", { headers: this.getHeader(localStorage.getItem('token') as string) });
   }
 }

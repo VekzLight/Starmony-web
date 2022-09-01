@@ -1,3 +1,5 @@
+<app-awaiting></app-awaiting>
+
 <mat-drawer-container class="main-container">
     <mat-drawer class="side-nav" mode="side" opened>
 
@@ -30,47 +32,16 @@
 
             <!--Search{ busqueda y coleccion }-->
             <div fxLayout="column" fxLayoutAlign="start center" class="search">
-                <button routerLink="/home/seeker" mat-button> Busqueda <mat-icon>search</mat-icon></button>
-                <button routerLink="/home/collection" mat-button> Colección <mat-icon>collections</mat-icon></button>
+                <button routerLink="/home/seeker" routerLinkActive="routeActive" mat-button> Busqueda <mat-icon>search</mat-icon></button>
+                <button routerLink="/home/collection" routerLinkActive="routeActive" mat-button> Colección <mat-icon>collections</mat-icon></button>
             </div>
 
             <!--Herramientas{ Analizar y Generar }-->
             <div fxLayout="column" fxLayoutAlign="start center" class="search">
-                <button mat-button [matMenuTriggerFor]="menuAnalizar" disabled>
-                    Analizar
-                    <mat-icon>arrow_forward_ios</mat-icon>
-                </button>
-                <mat-menu #menuAnalizar="matMenu" xPosition="after">
-                    <button mat-menu-item>
-                        <span>Estructura</span>
-                    </button>
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item>
-                        <span>Uso</span>
-                    </button>
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item>
-                        <span>Todo</span>
-                    </button>
-                </mat-menu>
-
-                <button mat-button [matMenuTriggerFor]="menuGenerar" disabled>
+                <button routerLink="/home/generator" (click)="generate()" mat-button [disabled]="elementsContainerService.musicalElementsAnalized.isEmpty">
                     Generar
                     <mat-icon>arrow_forward_ios</mat-icon>
                 </button>
-                <mat-menu #menuGenerar="matMenu" xPosition="after">
-                    <button mat-menu-item>
-                        <span>Acordes</span>
-                    </button>
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item>
-                        <span>Escalas</span>
-                    </button>
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item>
-                        <span>Progresiones</span>
-                    </button>
-                </mat-menu>
             </div>
         </div>
             

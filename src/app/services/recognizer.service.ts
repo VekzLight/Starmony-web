@@ -20,48 +20,4 @@ export class RecognizerService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllNotes():Observable<any>{
-    return this.http.get<Note>(this.endpoint+"/note");
-  }
-
-  public getAllTags():Observable<any>{
-    return this.http.get<Tag>(this.endpoint+"/tag");
-  }
-
-  public getAllIntervals():Observable<any>{
-    return this.http.get<Interval>(this.endpoint+"/interval");
-  }
-
-  public getAllChords():Observable<any>{
-    return this.http.get<Chord>(this.endpoint+"/chord");
-  }
-
-  public getAllScales():Observable<any>{
-    return this.http.get<Scale>(this.endpoint+"/scale");
-  }
-
-  public getAllProgressions():Observable<any>{
-    return this.http.get<Progression>(this.endpoint+"/progression");
-  }
-
-  public getAllConcreteChords():Observable<any>{
-    return this.http.get<ConcreteChord>(this.endpoint+"/chord/concrete");
-  }
-
-  public getConcreteIntervalWithNotes(firstNote: number, lastNote: number):Observable<any>{
-    return this.http.get<ConcreteInterval>(this.endpoint+"/interval/concrete/i");
-  }
-
-  public getConcreteScaleByIdAndTonic(scale: Scale, tonic: Note):Observable<ConcreteScale>{
-    return this.http.get<ConcreteScale>(this.endpoint+"/scale/concrete/s/"+scale.id+"/t/"+tonic.id);
-  }
-
-  public getScaleById(id: number):Observable<Scale>{
-    return this.http.get<Scale>(this.endpoint+"/scale/"+id);
-  }
-
-  public getProgressionById(id: number):Observable<Progression>{
-    return this.http.get<Progression>(this.endpoint+"/progression/"+id);
-  }
-
 }

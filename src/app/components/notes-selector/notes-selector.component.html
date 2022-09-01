@@ -1,0 +1,13 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-around center" class="note-container">
+    <button class="note"
+        (click)="elementsContainerService.selectNote(note)"
+        *ngFor="let note of elementsContainerService.notes"
+        [ngClass]="{
+            'active': elementsContainerService.notesSelected.includes(note),
+            'tonic':  seekerResultElementsService.filter.tonic == note
+        }"
+        color="primary"
+        mat-stroked-button> 
+        {{note.symbol}} 
+    </button>
+</div>

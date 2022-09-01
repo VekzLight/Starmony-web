@@ -1,0 +1,100 @@
+<div class="container" [ngClass]="{
+    'notDisplay': signalsService.typeElementAnalized != 'scale',
+    '':  signalsService.typeElementAnalized == 'scale'
+  }">
+  <div>
+    <button mat-button (click)="accordionScale.openAll()">Expand All</button>
+    <button mat-button (click)="accordionScale.closeAll()">Collapse All</button>
+  </div>
+
+  <mat-card fxLayoutAlign="center center" >
+    <mat-card-title-group>
+      <mat-card-title *ngIf="elementsContainerService.scaleAnalized.id != -1" >{{ elementsContainerService.scaleAnalized.tonic.symbol }}  {{elementsContainerService.scaleAnalized.name}} : {{ elementsContainerService.getNotes( signalsService.ObjectValues(elementsContainerService.scaleAnalized.notes).slice(0,-1)) }}</mat-card-title>
+
+    </mat-card-title-group>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-accordion class="example-headers-align" #MatAccordionScale multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3>Información Sobre la Escala</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <ul>
+          <li>Contiene {{ elementsContainerService.scaleDetail.id != -1 ? getTipesChords(elementsContainerService.scaleDetail) :"" }}</li>
+          <li>Su Codigo de semitonos es {{ elementsContainerService.scaleDetail.id != -1 ? elementsContainerService.scaleDetail.code :"" }}</li>
+          <li>Es considerada una escala {{ elementsContainerService.scaleDetail.id != -1 ? group(elementsContainerService.scaleDetail.id):"" }}</li>
+      </ul>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Intervalos
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+
+      <canvas class="canvas-detail" #detailCanvasInterval></canvas>
+
+      <br/>
+
+      
+  
+      <ul>
+        <li *ngFor="let idInterval of elementsContainerService.scaleAnalizedResp.concreteIntervalsIds" ><button (click)="selectInterval(idInterval)" mat-stroked-button>{{ searchInterval(idInterval) }} </button></li>
+      </ul>
+
+    </mat-expansion-panel>
+
+
+
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Acordes
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <canvas class="canvas-detail" #detailCanvasScale></canvas>
+
+      <br/>
+
+      <button (click)="selectGrade(idChord)" *ngFor="let idChord of elementsContainerService.scaleAnalizedResp.concreteChordsIds" mat-stroked-button>{{ searchChord(idChord) }}  </button>
+ 
+      <br/>
+      <br/>
+
+      <h2>Información Sobre El Acorde "{{elementsContainerService.chordAnalized.tonic.symbol}} {{elementsContainerService.chordAnalized.symbol}}"</h2>
+      <ul >
+          <li> El acorde de "{{elementsContainerService.chordAnalized.tonic.symbol }}  {{elementsContainerService.chordAnalized.name}}" es el {{ elementsContainerService.scaleDetail.id != -1 ? signalsService.gradesM[elementsContainerService.chordAnalizedResp.concreteScalesIds[elementsContainerService.scaleDetail.id_concrete_scale]] : "" }} grado de la escala de "{{ elementsContainerService.scaleDetail.id != -1 ? elementsContainerService.scaleDetail.tonic.symbol :"" }} {{ elementsContainerService.scaleDetail.id != -1 ? elementsContainerService.scaleDetail.symbol : "" }}"</li>
+          <li *ngFor="let concreteInterval of concreteIntervals; trackBy: trackItem"> Existe un intervalo de {{concreteInterval?.name}} ({{concreteInterval?.semitones}} semitonos) entre {{concreteInterval?.firstNote?.symbol}} y {{concreteInterval?.lastNote?.symbol}} </li>
+          <li> Es un acorde de {{getTypeChord(elementsContainerService.chordAnalized.id_concrete_chord)}} </li>
+      </ul>
+
+    </mat-expansion-panel>
+
+
+
+
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Progresiones
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <button (click)="progressionDetail(idProgression)" *ngFor="let idProgression of elementsContainerService.scaleAnalizedResp.concreteProgressionsIds" mat-stroked-button>{{ searchProgression(idProgression) }}  </button>
+     
+  
+    </mat-expansion-panel>
+    
+  </mat-accordion>
+</div>

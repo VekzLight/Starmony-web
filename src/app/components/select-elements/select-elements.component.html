@@ -1,0 +1,151 @@
+
+
+<div class="select-elements-container">
+    <app-starmony-header [back]="false"></app-starmony-header>
+    <mat-divider></mat-divider>
+    <h2>Elementos Seleccionados</h2>
+
+
+
+    <div class="example-action-buttons">
+        <button mat-button (click)="accordion.openAll()">Expand All</button>
+        <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+      </div>
+
+
+      
+      <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel [disabled]="seekerResultElementsService.selectedChords.length == 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Acordes
+                </mat-panel-title>
+                <mat-panel-description>
+                {{ seekerResultElementsService.selectedChords.length }} elementos.
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <div class="elementsContainer">
+                    <div class="elementContainer" (click)="selectConcreteChord(element.id_concrete_chord)" fxLayout="row" fxLayoutAlign="start center" *ngFor="let element of seekerResultElementsService.selectedChords">
+                        <mat-checkbox  [checked]="isSelectedChord(element.id_concrete_chord)" (change)="checkChord(element.id_concrete_chord)"> </mat-checkbox>
+                        <button class="elementLarge"
+                                [ngClass]="{
+                                    'selected': idConcreteChordSelected == element.id_concrete_chord,
+                                    '': idConcreteChordSelected != element.id_concrete_chord
+                                }"
+                                mat-stroked-button>
+                            {{ element.tonic.symbol }}{{ element.symbol }}
+                        </button>
+                        
+                        <div fxLayout="column" fxLayoutAlign="start center" class="config-menu" *ngIf=" idConcreteChordSelected == element.id_concrete_chord">
+                            
+                            <button class="config-button" (click)="analizeChord(element, true)" mat-raised-button>Analisis</button>
+                            <button class="config-button" (click)="addChordCollection(element)" mat-raised-button>Añadir a Colección</button>
+                        </div>
+                        
+                        <div fxLayout="column"  fxLayoutAlign="start center" class="config-menu" *ngIf=" idConcreteChordSelected == element.id_concrete_chord">       
+                            <button class="config-button"  (click)="upToneChord(element)" mat-raised-button>Subir Tono</button>
+                            <button class="config-button"  (click)="downToneChord(element)"mat-raised-button>Bajar Tono</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+
+        <mat-expansion-panel [disabled]="seekerResultElementsService.selectedScales.length == 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Escalas
+                </mat-panel-title>
+                <mat-panel-description>
+                {{ seekerResultElementsService.selectedScales.length }} elementos.
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="elementsContainer">
+                <div class="elementContainer"  fxLayout="row" fxLayoutAlign="start center" *ngFor="let element of seekerResultElementsService.selectedScales">
+                    <mat-checkbox [checked]="isSelectedScale(element.id_concrete_scale)" (change)="checkScale(element.id_concrete_scale)"> </mat-checkbox>
+                    <button class="elementLarge"
+                            [ngClass]="{
+                                'selected': idConcreteScaleSelected == element.id_concrete_scale,
+                                '': idConcreteScaleSelected != element.id_concrete_scale
+                            }"
+                            (click)="selectConcreteScale(element.id_concrete_scale)"
+                            mat-stroked-button>
+                        {{ element.tonic.symbol }} {{ element.symbol }}
+                    </button>
+                                            
+                    <div class="config-menu" *ngIf=" idConcreteScaleSelected == element.id_concrete_scale">
+                        <button class="config-button" (click)="analizeScale(element, true)" mat-raised-button>Analizar</button>
+                        <button class="config-button" (click)="addScaleCollection(element)" mat-raised-button>Añadir a Colección</button>
+                    </div>
+
+                    <div class="config-menu" *ngIf=" idConcreteScaleSelected == element.id_concrete_scale">
+                        <button class="config-button" (click)="upToneScale(element)" mat-raised-button>Subir Tono</button>
+                        <button class="config-button" (click)="downToneScale(element)"mat-raised-button>Bajar Tono</button>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [disabled]="seekerResultElementsService.selectedProgressions.length == 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Progresiones
+                </mat-panel-title>
+                <mat-panel-description>
+                {{ seekerResultElementsService.selectedProgressions.length }} elementos.
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="elementsContainer">
+                <div class="elementContainer" (click)="selectConcreteProgression(element.id_concrete_progression)" fxLayout="row" fxLayoutAlign="start center" *ngFor="let element of seekerResultElementsService.selectedProgressions">
+                    <mat-checkbox  [checked]="isSelectedProgression(element.id_concrete_progression)" (change)="checkProgression(element.id_concrete_progression)"> </mat-checkbox>
+                    <button class="elementLarge"
+                            [ngClass]="{
+                                'selected': idConcreteProgressionSelected == element.id_concrete_progression,
+                                '': idConcreteChordSelected != element.id_concrete_progression
+                            }"
+                            mat-stroked-button>
+                        {{ element.symbol }}  {{ getGrades(element.concreteGrades)}}
+                    </button>
+                                                                
+                    <div class="config-menu" *ngIf=" idConcreteProgressionSelected == element.id_concrete_progression">
+                        <button class="config-button" (click)="analizeProgression(element, true)" mat-raised-button>Analizar</button>
+                        <button class="config-button" (click)="addProgressionCollection(element)" mat-raised-button>Añadir a Colección</button>
+                    </div>
+
+                    <div class="config-menu" *ngIf=" idConcreteScaleSelected == element.id_concrete_scale">
+                        <button class="config-button" mat-raised-button>Subir Tono</button>
+                        <button class="config-button" mat-raised-button>Bajar Tono</button>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        
+        <mat-expansion-panel [disabled]="seekerResultElementsService.selectedIntervals.length == 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Intervalos
+                </mat-panel-title>
+                <mat-panel-description>
+                {{ seekerResultElementsService.selectedIntervals.length }} elementos.
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="elementsContainer">
+                <div class="elementContainer" (click)="selectConcreteInterval(element.id_concrete_interval)" fxLayout="row" fxLayoutAlign="start center" *ngFor="let element of seekerResultElementsService.selectedIntervals">
+                    <mat-checkbox  [checked]="isSelectedInterval(element.id_concrete_interval)" (change)="checkInterval(element.id_concrete_interval)"> </mat-checkbox>
+                    <button class="elementLarge"
+                            [ngClass]="{
+                                'selected': idConcreteIntervalSelected == element.id_concrete_interval,
+                                '': idConcreteIntervalSelected != element.id_concrete_interval
+                            }"
+                            mat-stroked-button>
+                        {{element.name}} {{element.firstNote.symbol}} - {{element.lastNote.symbol}}
+                    </button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+        
+      </mat-accordion>
+</div>

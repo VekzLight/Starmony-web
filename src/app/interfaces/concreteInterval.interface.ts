@@ -3,6 +3,6 @@ import { Note } from "./note.interface";
 
 export interface ConcreteInterval extends Interval{
     id_concrete_interval: number;
-    firsNote:  Note;
+    firstNote:  Note;
     lastNote:  Note;
 }

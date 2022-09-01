@@ -1,0 +1,94 @@
+<div class="container" [ngClass]="{
+    'notDisplay': signalsService.typeElementAnalized != 'progression',
+    '':  signalsService.typeElementAnalized == 'progression'
+  }">
+  <div>
+    <button mat-button (click)="accordionScale.openAll()">Expand All</button>
+    <button mat-button (click)="accordionScale.closeAll()">Collapse All</button>
+  </div>
+
+  <mat-card fxLayoutAlign="center center" >
+    <mat-card-title-group>
+      <mat-card-title> {{ elementsContainerService.progressionAnalized.symbol }}  {{ getGrades(elementsContainerService.progressionAnalized.concreteGrades)}} </mat-card-title>
+
+    </mat-card-title-group>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-accordion class="example-headers-align" #MatAccordionScale multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3>Información Sobre la Progresión</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <canvas class="canvas-detail" #detailCanvasProgressionScale></canvas>
+
+
+      <ul>
+        <li>
+            <div>
+                Se utiliza comunmente en los generos musicales:
+                <ol *ngFor="let tag of getTagsProgressionsOf( elementsContainerService.progressionAnalized.id )">  - {{ tag.name }} </ol> 
+            </div>
+            
+        </li>
+        <li *ngFor="let chordType of getTipesGradesList(elementsContainerService.progressionAnalized)"> Contiene {{ chordType }}</li>
+        <li> Se construye sobre la escala de "{{ elementsContainerService.scaleAnalized.id != -1 ? elementsContainerService.scaleAnalized.tonic.symbol : ""}} {{ elementsContainerService.scaleAnalized.id != -1  ? elementsContainerService.scaleAnalized.name : ""}}"</li>
+    </ul>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Intervalos
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+
+      <canvas class="canvas-detail" #detailCanvasInterval></canvas>
+
+      <br/>
+
+      
+  
+      <ul>
+        <li *ngFor="let idInterval of elementsContainerService.scaleAnalizedResp.concreteIntervalsIds" ><button (click)="selectInterval(idInterval)" mat-stroked-button>{{ searchInterval(idInterval) }} </button></li>
+      </ul>
+
+    </mat-expansion-panel>
+
+
+
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Acordes
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <canvas class="canvas-detail" #detailCanvasScale></canvas>
+
+      <br/>
+
+      <button (click)="selectGrade(idChord)" *ngFor="let idChord of elementsContainerService.scaleAnalizedResp.concreteChordsIds" mat-stroked-button>{{ searchChord(idChord) }}  </button>
+ 
+      <br/>
+      <br/>
+
+      <h2>Información Sobre El Acorde "{{ elementsContainerService.chordAnalized.tonic.symbol}} {{elementsContainerService.chordAnalized.symbol}}"</h2>
+      <ul *ngIf="elementsContainerService.scaleDetail.id != -1 ">
+          <li> El acorde de "{{ elementsContainerService.chordAnalized.id != -1 ? elementsContainerService.chordAnalized.tonic.symbol : ""}}  {{ elementsContainerService.chordAnalized.name}}" es el {{ elementsContainerService.scaleDetail.id != -1 ? signalsService.gradesM[elementsContainerService.chordAnalizedResp.concreteScalesIds[elementsContainerService.scaleDetail.id_concrete_scale]] : "" }} grado de la escala de "{{  elementsContainerService.scaleDetail.tonic.symbol }} {{elementsContainerService.scaleDetail.symbol }}"</li>
+          <li *ngFor="let concreteInterval of concreteIntervals; trackBy: trackItem"> Existe un intervalo de {{concreteInterval?.name}} ({{concreteInterval?.semitones}} semitonos) entre {{concreteInterval?.firstNote?.symbol}} y {{concreteInterval?.lastNote?.symbol}} </li>
+          <li> Es un acorde de {{getTypeChord(elementsContainerService.chordAnalized.id_concrete_chord)}} </li>
+      </ul>
+
+    </mat-expansion-panel>
+
+
+  </mat-accordion>
+</div>

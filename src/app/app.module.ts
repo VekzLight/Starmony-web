@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +20,27 @@ import { OrderSelectElementComponent } from './components/order-select-element/o
 import { OrderSelectorDirective } from './directives/order-selector.directive';
 
 import { SeekerComponent } from './components/seeker/seeker.component';
+import { OverlayComponent } from './components/overlay/overlay.component';
+import { TabConfigElementComponent } from './components/tab-config-element/tab-config-element.component';
+import { ConfigNotesComponent } from './components/config-notes/config-notes.component';
+import { NotesSelectorComponent } from './components/notes-selector/notes-selector.component';
+import { SeekerResultTableComponent } from './components/seeker-result-table/seeker-result-table.component';
+import { MainComponent } from './pages/main/main.component';
+import { LoginComponent } from './pages/login/login.component';
+import { ContactoComponent } from './pages/contacto/contacto.component';
+import { AwaitingComponent } from './pages/awaiting/awaiting.component';
+import { CollectionComponent } from './components/collection/collection.component';
+import { AnalizerComponent } from './components/analizer/analizer.component';
+import { GeneratorComponent } from './components/generator/generator.component';
+import { SelectElementsComponent } from './components/select-elements/select-elements.component';
+import { StarmonyHeaderComponent } from './components/starmony-header/starmony-header.component';
+import { UniqueElementPipe } from './pipes/unique-element.pipe';
+import { ElementDetailComponent } from './components/element-detail/element-detail.component';
+import { InterceptorLoaderService } from './services/interceptor-loader.service';
+import { AnalizerChordComponent } from './components/analizer-chord/analizer-chord.component';
+import { AnalizerIntervalComponent } from './components/analizer-interval/analizer-interval.component';
+import { AnalizerProgressionComponent } from './components/analizer-progression/analizer-progression.component';
+import { AnalizerScaleComponent } from './components/analizer-scale/analizer-scale.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +48,27 @@ import { SeekerComponent } from './components/seeker/seeker.component';
     HomeComponent,
     SeekerComponent,
     OrderSelectElementComponent,
-    OrderSelectorDirective
+    OrderSelectorDirective,
+    OverlayComponent,
+    TabConfigElementComponent,
+    ConfigNotesComponent,
+    NotesSelectorComponent,
+    SeekerResultTableComponent,
+    MainComponent,
+    LoginComponent,
+    ContactoComponent,
+    AwaitingComponent,
+    CollectionComponent,
+    AnalizerComponent,
+    GeneratorComponent,
+    SelectElementsComponent,
+    StarmonyHeaderComponent,
+    UniqueElementPipe,
+    ElementDetailComponent,
+    AnalizerChordComponent,
+    AnalizerIntervalComponent,
+    AnalizerProgressionComponent,
+    AnalizerScaleComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +83,9 @@ import { SeekerComponent } from './components/seeker/seeker.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth())
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass:InterceptorLoaderService, multi : true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

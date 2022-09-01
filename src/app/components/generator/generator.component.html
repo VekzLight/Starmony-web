@@ -1,0 +1,117 @@
+<app-starmony-header [back]="true"></app-starmony-header>
+
+<mat-divider></mat-divider>
+
+<mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel [disabled]="chordsGeneratedOfIntervals.length == 0 && scalesGeneratedOfIntervals.length == 0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Intervalos
+            </mat-panel-title>
+            <mat-panel-description>
+                {{ chordsGeneratedOfIntervals.length + scalesGeneratedOfIntervals.length}} Elementos generados a partir de intervalos.
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div *ngIf=" chordsGeneratedOfIntervals.length != 0">
+            <h3>Acordes Generadas</h3>
+            <ul>
+                <li *ngFor="let concreteChord of chordsGeneratedOfIntervals"> <button mat-stroked-button> {{ concreteChord.tonic.symbol }} {{ concreteChord.name }} </button> </li>
+            </ul>
+
+            
+        </div>
+
+        <div *ngIf=" scalesGeneratedOfIntervals.length != 0">
+            <h3>Escalas Generadas</h3>
+            <ul>
+                <li *ngFor="let concreteScale of scalesGeneratedOfIntervals"> <button mat-stroked-button> {{ concreteScale.tonic.symbol }} {{ concreteScale.name }} </button> </li>
+            </ul>
+        </div>
+
+        <div *ngIf=" chordsGeneratedOfIntervals.length == 0 && scalesGeneratedOfIntervals.length == 0">
+            No Se encontraron Resultados
+        </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel [disabled]="scalesGeneratedOfChords.length == 0 && progressionsGeneratedOfChords.length == 0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Acordes
+            </mat-panel-title>
+            <mat-panel-description>
+                {{ scalesGeneratedOfChords.length + progressionsGeneratedOfChords.length}} Elementos generados a partir de Acordes.
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div *ngIf=" progressionsGeneratedOfChords.length != 0">
+            <h3>Progresiones Generadas</h3>
+            <ul>
+                <li *ngFor="let concreteProgression of progressionsGeneratedOfChords"> <button mat-stroked-button> {{ concreteProgression?.symbol }} : {{ getGrades(concreteProgression.concreteGrades)}} </button> </li>
+            </ul>
+        </div>
+
+        <div *ngIf=" scalesGeneratedOfChords.length != 0">
+            <h3>Escalas Generadas</h3>
+            <ul>
+                <li *ngFor="let concreteScale of scalesGeneratedOfChords"> <button mat-stroked-button> {{ concreteScale?.tonic?.symbol }} {{ concreteScale?.name }} </button> </li>
+            </ul>
+        </div>
+
+        <div *ngIf=" progressionsGeneratedOfChords.length == 0 && scalesGeneratedOfChords.length == 0">
+            No Se encontraron Resultados
+        </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel [disabled]="chordsCommonOfScales.length == 0 && intervalsCommonOfScales.length == 0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Escalas
+            </mat-panel-title>
+            <mat-panel-description>
+                {{ chordsCommonOfScales.length + intervalsCommonOfScales.length}} Elementos generados a partir de Escalas.
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div *ngIf=" chordsCommonOfScales.length != 0">
+            <h3>Acordes</h3>
+            <ul>
+                <li *ngFor="let concreteScale of chordsCommonOfScales"> <button mat-stroked-button> {{ concreteScale.tonic.symbol }} {{concreteScale.name}} </button> </li>
+            </ul>
+        </div>
+
+        <div *ngIf=" intervalsCommonOfScales.length != 0">
+            <h3>Intervalos</h3>
+            <ul>
+                <li *ngFor="let concreteInterval of intervalsCommonOfScales"> <button mat-stroked-button> {{ concreteInterval?.name }} : {{ concreteInterval?.firstNote?.symbol }} - {{ concreteInterval?.lastNote?.symbol }}</button> </li>
+            </ul>
+        </div>
+
+        <div *ngIf=" chordsCommonOfScales.length == 0 && intervalsCommonOfScales.length == 0">
+            No Se encontraron Resultados
+        </div>
+    </mat-expansion-panel>
+
+
+
+    <mat-expansion-panel [disabled]="chordsCommonOfProgression.length == 0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Progressiones
+            </mat-panel-title>
+            <mat-panel-description>
+                {{ chordsCommonOfProgression.length }} Elementos generados a partir de Progressiones.
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div *ngIf=" chordsCommonOfProgression.length != 0">
+            <h3>Acordes</h3>
+            <ul>
+                <li *ngFor="let concreteChord of chordsCommonOfProgression"> <button mat-stroked-button> {{ concreteChord.tonic.symbol }} {{concreteChord.name}} </button> </li>
+            </ul>
+        </div>
+
+    </mat-expansion-panel>
+</mat-accordion>

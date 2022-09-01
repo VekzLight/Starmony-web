@@ -1,0 +1,5 @@
+<div fxFlex fxLayout="column" fxLayoutAlign="center center" class="awaiting-container" *ngIf="interceptorLoaderService.isLoading | async">
+    <mat-spinner></mat-spinner>
+    <h2 *ngIf="!completed"> {{ type }} {{ element }} ... </h2>
+    <h2 *ngIf="completed"> Listo. </h2>
+</div>

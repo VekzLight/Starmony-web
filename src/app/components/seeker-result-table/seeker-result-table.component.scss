@@ -1,0 +1,33 @@
+table {
+    width: 100%;
+}
+  
+td, th {
+    max-width: 20%; 
+    min-width: 5%;
+}
+
+h2{
+    margin-left: 10px;
+}
+
+.mat-form-field{
+    width: 90%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5%;
+}
+
+.mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+    border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+    font-weight: bold;
+}

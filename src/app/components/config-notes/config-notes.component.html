@@ -1,0 +1,37 @@
+<app-notes-selector></app-notes-selector>
+
+<mat-divider></mat-divider>
+
+<div #orderAddContainer fxLayout="row" fxLayoutAlign="start center" class="order-container">
+    <h4>Orden</h4>
+    <mat-form-field appearance="fill">
+        <mat-label>Tonica</mat-label>
+        <mat-select [(ngModel)]="seekerResultElements.filter.tonic" (ngModelChange)="elementsContainerService.selectTonic($event)">
+            <mat-option *ngFor="let note of elementsContainerService.notesSelected" [value]="note"> {{note.symbol}} </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <ng-template appOrderSelector ></ng-template>
+
+    <button mat-icon-button (click)="addOrder()" *ngIf="elementsContainerService.notesSelected.length > signalsService.orderComponents + 1">
+        <mat-icon>add_circle_outline</mat-icon>
+    </button>
+</div>
+
+<mat-divider></mat-divider>
+
+<div fxLayout="row" fxLayoutAlign="space-around center" class="filter-by-options-container">
+    <mat-form-field appearance="fill">
+        <mat-label>notas minimas</mat-label>
+        <mat-select  [(ngModel)]="seekerResultElements.filter.min" (ngModelChange)="elementsContainerService.selectMin($event)">
+            <mat-option *ngFor="let min of [1,2,3,4,5,6,7,8,8,10,11,12]" [value]="min"> {{min}} </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>notas maximas</mat-label>
+        <mat-select  [(ngModel)]="seekerResultElements.filter.max" (ngModelChange)="elementsContainerService.selectMax($event)">
+            <mat-option *ngFor="let max of [1,2,3,4,5,6,7,8,8,10,11,12]" [value]="max"> {{max}} </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

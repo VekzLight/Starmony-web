@@ -1,0 +1,59 @@
+<div class="container"
+  [ngClass]="{
+    'notDisplay': signalsService.typeElementAnalized != 'chord',
+    '':  signalsService.typeElementAnalized == 'chord'
+  }">
+  <div>
+    <button mat-button (click)="accordionChord.openAll()">Expand All</button>
+    <button mat-button (click)="accordionChord.closeAll()">Collapse All</button>
+  </div>
+
+  <mat-card fxLayoutAlign="center center" >
+    <mat-card-title-group>
+      <mat-card-title>{{ elementsContainerService.chordAnalizedResp.exist ? elementsContainerService.chordAnalized.tonic.symbol : "" }}  {{ elementsContainerService.chordAnalizedResp.exist ? elementsContainerService.chordAnalized.name : ""}} : {{ elementsContainerService.chordAnalizedResp.exist ? elementsContainerService.getNotes(elementsContainerService.chordAnalized.notes) :""}}</mat-card-title>
+      
+    </mat-card-title-group>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-accordion class="example-headers-align" #MatAccordionChord multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Intervalos
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <canvas class="canvas-detail" #detailCanvasInterval></canvas>
+      <br>
+      <ul>
+        <li *ngFor="let idInterval of elementsContainerService.chordAnalizedResp.concreteIntervalsIds" ><button (click)="selectInterval(idInterval)"  mat-stroked-button>{{ searchInterval(idInterval) }} </button></li>
+      </ul>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Escalas
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <button (click)="scaleDetail(idScale)" class="button-scales" *ngFor="let idScale of scalesIdsKey" mat-stroked-button>{{ searchScale(idScale) }}</button>
+  
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Progresiones
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <button (click)="progressionDetail(idProgression)" class="button-progressions" *ngFor="let idProgression of progressionsIdsKey" mat-stroked-button>{{ searchProgression(idProgression) }}</button>
+  
+    </mat-expansion-panel>
+    
+  </mat-accordion>
+</div>

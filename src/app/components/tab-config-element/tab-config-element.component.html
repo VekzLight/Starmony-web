@@ -1,0 +1,159 @@
+<mat-tab-group mat-align-tabs="center" (selectedIndexChange)="signalsService.tabFilter.setValue($event)">
+  <mat-tab label="Acordes">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Typo</mat-label>
+      <mat-select [ngModel]="type" (ngModelChange)="selectType($event)">
+        <mat-option *ngFor="let type of elementsContainerService.chords" [value]="type" > {{type.symbol}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Añadidos</mat-label>
+      <mat-select  [ngModel]="adder" (ngModelChange)="selectAdder($event)">
+        <mat-option *ngFor="let type of ['-','Triada', 'Septima', 'Novena', 'Treceava']" [value]="type"> {{type}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- TODO: Añadir inversiones de acordes -->
+  </mat-tab>
+
+
+
+
+
+
+  <mat-tab label="Escalas" >
+
+    <mat-form-field appearance="fill">
+      <mat-label>Grupo</mat-label>
+      <mat-select [ngModel]="groupId" (ngModelChange)="selectGroup($event)">
+        <mat-option *ngFor="let type of elementsContainerService.tagScales | uniqueElement" [value]="type.tagDTO.id"> {{type.tagDTO.name}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="search-full-width" appearance="fill">
+      <mat-label>Codigo: "T-T-sT-T-T-T-sT-T"</mat-label>
+      <input type="text"
+              placeholder="Codigo"
+              aria-label="Codigo"
+              (keyup)="codeFilter($event)"
+              matInput
+             />
+    </mat-form-field>
+
+    <!-- TODO: Añadir Direccionalidad a las escalas -->
+
+    <mat-divider></mat-divider>
+    <mat-label mat-h2 class="label-grados">Grados</mat-label>
+    <br/>
+    <mat-form-field  appearance="fill" class="select-grades">
+      <mat-label>I</mat-label>
+      <mat-select  [ngModel]="seekerResultElements.gradeTypes['I']" (ngModelChange)="selectGradeType($event,1)" >
+        <mat-option *ngFor="let type of elementsContainerService.chords" [value]="type.id" > {{type.symbol}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="select-grades">
+      <mat-label>II</mat-label>
+      <mat-select [ngModel]="seekerResultElements.gradeTypes['II']" (ngModelChange)="selectGradeType($event,2)">
+        <mat-option *ngFor="let type of elementsContainerService.chords" [value]="type.id" > {{type.symbol}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="select-grades">
+      <mat-label>III</mat-label>
+      <mat-select [ngModel]="seekerResultElements.gradeTypes['III']" (ngModelChange)="selectGradeType($event,3)">
+        <mat-option *ngFor="let type of elementsContainerService.chords" [value]="type.id" > {{type.symbol}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="select-grades">
+      <mat-label>IV</mat-label>
+      <mat-select [ngModel]="seekerResultElements.gradeTypes['IV']" (ngModelChange)="selectGradeType($event,4)">
+        <mat-option *ngFor="let type of elementsContainerService.chords" [value]="type.id" > {{type.symbol}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="select-grades">
+      <mat-label>V</mat-label>
+      <mat-select [ngModel]="seekerResultElements.gradeTypes['V']" (ngModelChange)="selectGradeType($event,5)">
+        <mat-option *ngFor="let type of elementsContainerService.chords" [value]="type.id" > {{type.symbol}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="select-grades">
+      <mat-label>VI</mat-label>
+      <mat-select [ngModel]="seekerResultElements.gradeTypes['VI']" (ngModelChange)="selectGradeType($event,6)">
+        <mat-option *ngFor="let type of elementsContainerService.chords" [value]="type.id" > {{type.symbol}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="select-grades">
+      <mat-label>VII</mat-label>
+      <mat-select [ngModel]="seekerResultElements.gradeTypes['VII']" (ngModelChange)="selectGradeType($event,7)">
+        <mat-option *ngFor="let type of elementsContainerService.chords" [value]="type.id" > {{type.symbol}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-tab>
+
+
+
+
+  <mat-tab label="Progresiones">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Cadencia</mat-label>
+      <mat-select [ngModel]="seekerResultElements.typeProgression" (ngModelChange)="selectTypeProgression($event)">
+        <mat-option *ngFor="let type of ['Autentica', 'Plagal', 'Semicadencia', 'Rota']" [value]="type"> {{type}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label># Acordes</mat-label>
+      <mat-select [ngModel]="seekerResultElements.numberChords" (ngModelChange)="selectNumberChords($event)">
+        <mat-option *ngFor="let type of ['2','3','4','5','6','7','8','9','10', '10+']" [value]="type"> {{type}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="search-full-width" appearance="fill">
+      <mat-label>Codigo: "I-IV-V-I"</mat-label>
+      <input type="text"
+              placeholder="Codigo"
+              aria-label="Codigo"
+              (keyup)="codeProgressionFilter($event)"
+              matInput
+             />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Acorde en Inicio</mat-label>
+      <mat-select [ngModel]="seekerResultElements.firstChord" (ngModelChange)="selectFirsTypeProgression($event)">
+        <mat-option *ngFor="let type of elementsContainerService.chords" [value]="type" > {{type.symbol}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Acorde en Final</mat-label>
+      <mat-select [ngModel]="seekerResultElements.lastChord" (ngModelChange)="selectLastTypeProgression($event)">
+        <mat-option *ngFor="let type of elementsContainerService.chords" [value]="type" > {{type.symbol}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-tab>
+
+
+
+  <mat-tab label="Intervalos">
+
+    <mat-form-field class="search-full-width" appearance="fill">
+      <mat-label>Semitonos</mat-label>
+      <input type="text"
+              placeholder="5"
+              aria-label="5"
+              (keyup)="setSemitones($event)"
+              matInput />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Typo</mat-label>
+      <mat-select  [ngModel]="seekerResultElements.typeInterval" (ngModelChange)="selectTypeInterval($event)">
+        <mat-option *ngFor="let type of ['Simple','Compuesto']" [value]="type"> {{type}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Direccion</mat-label>
+      <mat-select [ngModel]="seekerResultElements.direction" (ngModelChange)="selectDirection($event)">
+        <mat-option *ngFor="let type of ['Ascendente', 'Descendente']" [value]="type"> {{type}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-tab>
+</mat-tab-group>

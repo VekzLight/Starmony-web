@@ -36,7 +36,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/styles/dracula.scss",
+              "src/assets/styles/neon.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -76,6 +76,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "browserTarget": "Starmony-web:build:production"
@@ -106,7 +109,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/assets/styles/neon.scss",
               "src/styles.scss"
             ],
             "scripts": []
