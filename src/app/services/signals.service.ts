@@ -16,6 +16,8 @@ export class SignalsService {
 
   orderComponents: number = 0;
 
+  generated: boolean = false;
+
   guideStep: number = -1;
 
   typeElementAnalized: string = "";

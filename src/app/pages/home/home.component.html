@@ -8,26 +8,7 @@
             <div fxLayoutAlign="space-around center" class="header">
                 <img class="logo" src="https://logoeps.com/wp-content/uploads/2013/04/pauta-musica-vector.png">
                 
-                <button mat-icon-button [matMenuTriggerFor]="menuProfile" >
-                    <mat-icon>menu</mat-icon>
-                </button>
-
-                <mat-menu #menuProfile="matMenu">
-                    <button mat-menu-item>
-                        <mat-icon>account_circle</mat-icon>
-                        <span>Perfil</span>
-                    </button>
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item>
-                        <mat-icon>exit_to_app</mat-icon>
-                        <span>Salir de la App</span>
-                    </button>
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item>
-                        <mat-icon>logout</mat-icon>
-                        <span>Cerrar Sesion</span>
-                    </button>
-                </mat-menu>
+                <mat-icon>logout</mat-icon>
             </div>
 
             <!--Search{ busqueda y coleccion }-->
@@ -38,8 +19,13 @@
 
             <!--Herramientas{ Analizar y Generar }-->
             <div fxLayout="column" fxLayoutAlign="start center" class="search">
-                <button routerLink="/home/generator" (click)="generate()" mat-button [disabled]="elementsContainerService.musicalElementsAnalized.isEmpty">
+                <button routerLink="/home/generator_gui" (click)="generate()" mat-raised-button color="primary">
                     Generar
+                </button>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start center" class="search">
+                <button routerLink="/home/generator" (click)="generate()" mat-button [disabled]="elementsContainerService.musicalElementsAnalized.isEmpty">
+                    Analizar
                     <mat-icon>arrow_forward_ios</mat-icon>
                 </button>
             </div>

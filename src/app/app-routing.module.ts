@@ -12,6 +12,7 @@ import { SelectElementsComponent } from './components/select-elements/select-ele
 import { AnalizerComponent } from './components/analizer/analizer.component';
 import { GeneratorComponent } from './components/generator/generator.component';
 import { ElementDetailComponent } from './components/element-detail/element-detail.component';
+import { GeneratorGuiComponent } from './components/generator-gui/generator-gui.component';
 
 const routes: Routes = [
   { path: 'home',         component: HomeComponent,
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'analizer',           component: AnalizerComponent},
       { path: 'generator',          component: GeneratorComponent},
       { path: 'element_detail',     component: ElementDetailComponent},
+      { path: 'generator_gui',     component: GeneratorGuiComponent},
     ]},
   { path: 'login/:type',  component: LoginComponent},
   { path: 'main',         component: MainComponent},

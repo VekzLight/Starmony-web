@@ -14,6 +14,7 @@ import { Progression } from '../interfaces/progression.interface';
 import { ProgressionAnalized } from '../interfaces/progressionAnalized.interface';
 import { Scale } from '../interfaces/scale.interface';
 import { ScaleAnalized } from '../interfaces/scaleAnalized.interface';
+import { ScaleGenerated } from '../interfaces/scaleGenerated.interface';
 import { ScaleGrade } from '../interfaces/scaleGrade.interface';
 import { Tag } from '../interfaces/tag.interface';
 import { TagProgression } from '../interfaces/TagProgression.interface';
@@ -44,6 +45,11 @@ export class ElementsContainerService {
 
   notesSelected: Note[] = [];
   tonic: Note;
+
+
+
+  intervalsSelectedGen: ConcreteInterval[] = [];
+  scaleGenerated: ScaleGenerated;
 
   concreteScaleGrades: ConcreteGradeScales[] = [];
   scaleGrades:  ScaleGrade[] = [];
@@ -87,7 +93,7 @@ export class ElementsContainerService {
     if( !musicalElements.isEmpty ) this.musicalElementsAnalized = musicalElements;
 
     this.chordAnalizedResp = JSON.parse( localStorage.getItem("chordAnalizedResp") || JSON.stringify( { exist: false } as ChordAnalized ) );
-    this.chordAnalized = JSON.parse(localStorage.getItem("chordAnalized") || '{}');
+    this.chordAnalized = JSON.parse(localStorage.getItem("chordAnalized") ||  JSON.stringify({id: - 1} as ConcreteChord));
 
     this.progressionAnalizedResp = JSON.parse( localStorage.getItem("progressionAnalizedResp") || JSON.stringify( { exist: false } as ProgressionAnalized ) );
     this.progressionAnalized = JSON.parse(localStorage.getItem("progressionAnalized") || '{}');
@@ -103,6 +109,7 @@ export class ElementsContainerService {
     this.userConcreteChords = JSON.parse(localStorage.getItem('userConcreteChords') || '[]');
     this.userConcreteScales = JSON.parse(localStorage.getItem('userConcreteScales') || '[]');
     this.userConcreteProgressions = JSON.parse(localStorage.getItem('userConcreteProgressions') || '[]');
+
   }
 
 

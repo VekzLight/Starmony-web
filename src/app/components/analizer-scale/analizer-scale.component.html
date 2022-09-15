@@ -71,11 +71,11 @@
       <br/>
       <br/>
 
-      <h2>Información Sobre El Acorde "{{elementsContainerService.chordAnalized.tonic.symbol}} {{elementsContainerService.chordAnalized.symbol}}"</h2>
+      <h2 *ngIf="elementsContainerService.chordAnalized.id != -1">Información Sobre El Acorde "{{elementsContainerService.chordAnalized.tonic.symbol}} {{elementsContainerService.chordAnalized.symbol}}"</h2>
       <ul >
-          <li> El acorde de "{{elementsContainerService.chordAnalized.tonic.symbol }}  {{elementsContainerService.chordAnalized.name}}" es el {{ elementsContainerService.scaleDetail.id != -1 ? signalsService.gradesM[elementsContainerService.chordAnalizedResp.concreteScalesIds[elementsContainerService.scaleDetail.id_concrete_scale]] : "" }} grado de la escala de "{{ elementsContainerService.scaleDetail.id != -1 ? elementsContainerService.scaleDetail.tonic.symbol :"" }} {{ elementsContainerService.scaleDetail.id != -1 ? elementsContainerService.scaleDetail.symbol : "" }}"</li>
+          <li *ngIf="elementsContainerService.chordAnalized.id != -1"> El acorde de "{{elementsContainerService.chordAnalized.tonic.symbol }}  {{elementsContainerService.chordAnalized.name}}" es el {{ elementsContainerService.scaleDetail.id != -1 ? signalsService.gradesM[elementsContainerService.chordAnalizedResp.concreteScalesIds[elementsContainerService.scaleDetail.id_concrete_scale]] : "" }} grado de la escala de "{{ elementsContainerService.scaleDetail.id != -1 ? elementsContainerService.scaleDetail.tonic.symbol :"" }} {{ elementsContainerService.scaleDetail.id != -1 ? elementsContainerService.scaleDetail.symbol : "" }}"</li>
           <li *ngFor="let concreteInterval of concreteIntervals; trackBy: trackItem"> Existe un intervalo de {{concreteInterval?.name}} ({{concreteInterval?.semitones}} semitonos) entre {{concreteInterval?.firstNote?.symbol}} y {{concreteInterval?.lastNote?.symbol}} </li>
-          <li> Es un acorde de {{getTypeChord(elementsContainerService.chordAnalized.id_concrete_chord)}} </li>
+          <li *ngIf="elementsContainerService.chordAnalized.id != -1"> Es un acorde de {{getTypeChord(elementsContainerService.chordAnalized.id_concrete_chord)}} </li>
       </ul>
 
     </mat-expansion-panel>

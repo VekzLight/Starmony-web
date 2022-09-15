@@ -1,12 +1,14 @@
 {
   "name": "starmony-web",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "electron-build": "ng build && electron ."
   },
   "private": true,
   "dependencies": {

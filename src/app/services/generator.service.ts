@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ConcreteChord } from '../interfaces/concreteChord.interface';
+import { ScaleGenerated } from '../interfaces/scaleGenerated.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +27,9 @@ export class GeneratorService {
 
   public getConcreteProgressionsWithCScaleAndTag(idConcretescale: number, idTag: number ):any{
     return this.http.get<any>(this.uri+"/progression/concrete/scale/concrete/"+idConcretescale+"/tag/"+idTag);
+  }
+
+  public generateCompleteScale(code: string): Observable<ScaleGenerated>{
+    return this.http.get<ScaleGenerated>(this.uri+"/scale/"+code)
   }
 }
