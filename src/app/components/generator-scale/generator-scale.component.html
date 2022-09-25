@@ -1,86 +1,58 @@
+<app-starmony-header [back]="true"></app-starmony-header>
+
 <div class="container">
     
     <div class="info">
         <h2>Escala Generada</h2>
-        <button mat-raised-button color="primary"> Guardar </button>
-        <mat-accordion class="example-headers-align" #MatAccordionScale multi>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <h3>Escala #23</h3>
-                </mat-panel-title>
-                </mat-expansion-panel-header>
-            
-                <ul>
-                    <li>Contiene 2 Acordes de tipo mayor, 2 Acordes de tipo menor, 1 Acordes de tipo séptima con quinta disminuida, 1 Acordes de tipo aumentada, 1 Acordes de tipo con segunda suspendida quita bemol.</li>
-                    <li>Su Codigo de semitonos es 1–3–1–2–1–3–1</li>
-                    <li>Su Codigo de semitonos es sT-3sT-sT-T-sT-3sT-sT</li>
-                </ul>
-        
-            </mat-expansion-panel>
-        
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Intervalos
-                </mat-panel-title>
-                </mat-expansion-panel-header>
-            
-        
-                <canvas class="canvas-detail" #detailCanvasInterval></canvas>
-        
-                <br/>
+        <button mat-raised-button *ngIf="!elementsContainerService.scaleGenerated.saved && savedScale == false" (click)="saveScale()"  color="primary"> Guardar </button>
+        <h3 style="color:red" *ngIf="elementsContainerService.scaleGenerated.saved"> Escala en base de datos!. </h3>
 
-                <ul>
-                <li *ngFor="let idInterval of elementsContainerService.scaleAnalizedResp.concreteIntervalsIds" ><button (click)="selectInterval(idInterval)" mat-stroked-button>{{ searchInterval(idInterval) }} </button></li>
-                </ul>
         
-            </mat-expansion-panel>
+
+        <div>
+            <canvas class="canvas-detail" #detailCanvasIntervals></canvas>
         
-        
-        
-        
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Acordes
-                </mat-panel-title>
-                </mat-expansion-panel-header>
-        
-                <canvas class="canvas-detail" #detailCanvasScale></canvas>
-        
-                <br/>
-        
-                <button (click)="selectGrade(idChord)" *ngFor="let idChord of elementsContainerService.scaleAnalizedResp.concreteChordsIds" mat-stroked-button>{{ searchChord(idChord) }}  </button>
-            
-                <br/>
-                <br/>
-        
-                <h2 *ngIf="elementsContainerService.chordAnalized.id != -1">Información Sobre El Acorde "{{elementsContainerService.chordAnalized.tonic.symbol}} {{elementsContainerService.chordAnalized.symbol}}"</h2>
-                <ul >
-                    <li *ngIf="elementsContainerService.chordAnalized.id != -1"> El acorde de "{{elementsContainerService.chordAnalized.tonic.symbol }}  {{elementsContainerService.chordAnalized.name}}" es el {{ elementsContainerService.scaleDetail.id != -1 ? signalsService.gradesM[elementsContainerService.chordAnalizedResp.concreteScalesIds[elementsContainerService.scaleDetail.id_concrete_scale]] : "" }} grado de la escala de "{{ elementsContainerService.scaleDetail.id != -1 ? elementsContainerService.scaleDetail.tonic.symbol :"" }} {{ elementsContainerService.scaleDetail.id != -1 ? elementsContainerService.scaleDetail.symbol : "" }}"</li>
-                    <li *ngFor="let concreteInterval of concreteIntervals; trackBy: trackItem"> Existe un intervalo de {{concreteInterval?.name}} ({{concreteInterval?.semitones}} semitonos) entre {{concreteInterval?.firstNote?.symbol}} y {{concreteInterval?.lastNote?.symbol}} </li>
-                    <li *ngIf="elementsContainerService.chordAnalized.id != -1"> Es un acorde de {{getTypeChord(elementsContainerService.chordAnalized.id_concrete_chord)}} </li>
-                </ul>
-        
-            </mat-expansion-panel>
-        
-        
-        
-        
-        
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Progresiones
-                </mat-panel-title>
-                </mat-expansion-panel-header>
-            
-                <button (click)="progressionDetail(idProgression)" *ngFor="let idProgression of elementsContainerService.scaleAnalizedResp.concreteProgressionsIds" mat-stroked-button>{{ searchProgression(idProgression) }}  </button>
-                
-            
-            </mat-expansion-panel>
-            
-        </mat-accordion>
+            <br/>
+
+            <div fxLayout="column" fxLayoutAlign="start center" >
+                <div style="width:100%">
+                    <h2>Tonica</h2>
+                    <button *ngFor="let note of notesChangered"
+                            (click)="changeTonic(note)"
+                            [ngClass]="{
+                                'active': tonic.id == note.id,
+                                '':  tonic.id != note.id
+                            }"
+                            color="primary"
+                            mat-stroked-button>{{ note.symbol }} </button>
+                </div>
+                <br>
+                <div style="width:100%">
+                    <h2>Intervalos</h2>
+                    <button *ngFor="let concreteInterval of concreteIntervalsFiltered" 
+                            (click)="selectInterval(concreteInterval.id_concrete_interval)"
+                            mat-stroked-button>{{ searchInterval(concreteInterval.id_concrete_interval) }} </button>
+                </div>
+
+            </div>
+        </div>
+
+        <canvas [ngClass]="{
+                    'notDisplay': concreteProgresionSize == 0,
+                    '': concreteProgresionSize != 0
+                }"
+                class="canvas-detail" #detailCanvasProgression></canvas>
+
+        <div style="width:100%" *ngIf="concreteProgresionSize != 0">
+            <h2>Progressiones</h2>
+            <button (click)="progressionDetail(concreteProgression)" *ngFor="let concreteProgression of concreteProgressiones" mat-stroked-button>{{ searchProgression(concreteProgression) }}  </button>
+        </div>
+        <br>
+        <br>
+        <div style="width:100%" *ngIf="concreteProgresionSize == 0">
+            <h2>Algunos acordes de los grados musicales no estan definidos aun,
+            por lo tanto no existen progresiones de acordes para esta escala.</h2>
+        </div>
+
     </div>
 </div>

@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ConcreteChord } from '../interfaces/concreteChord.interface';
+import { Message } from '../interfaces/message.interface';
+import { ProgressionGenerated } from '../interfaces/progressionGenerated.interface';
 import { ScaleGenerated } from '../interfaces/scaleGenerated.interface';
 
 @Injectable({
@@ -31,5 +33,17 @@ export class GeneratorService {
 
   public generateCompleteScale(code: string): Observable<ScaleGenerated>{
     return this.http.get<ScaleGenerated>(this.uri+"/scale/"+code)
+  }
+
+  public generateCompleteProgression(code: string): Observable<ProgressionGenerated>{
+    return this.http.get<ProgressionGenerated>(this.uri+"/progression/"+code)
+  }
+
+  public generateCompleteProgressionSave(code: string): Observable<Message>{
+    return this.http.get<Message>(this.uri+"/progression/"+code+"/save")
+
+  }
+  public generateCompleteScaleSave(code: string): Observable<Message>{
+    return this.http.get<Message>(this.uri+"/scale/"+code+"/save")
   }
 }

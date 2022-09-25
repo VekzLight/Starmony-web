@@ -1,0 +1,54 @@
+<app-starmony-header [back]="true"></app-starmony-header>
+
+<div class="container">
+    <div *ngIf="elementsContainerService.progressionGenerated.scales.length == 0" class="escales">
+        <h2>No existen escalas compartibles con esta progresion.</h2>
+        <h2>Intenta probar con otra combinacion o agregar una escala compartible en la seccion de escalas.</h2>
+    </div>
+    <div [ngClass]="{
+            'notDisplay':elementsContainerService.progressionGenerated.scales.length == 0,
+            '':  elementsContainerService.progressionGenerated.scales.length != 0
+        }" class="escales">
+        <h2>Progresión Generada</h2>
+        <button mat-raised-button *ngIf="!elementsContainerService.progressionGenerated.saved" (click)="saveProgression()"  color="primary"> Guardar </button>
+        <h3 style="color:red" *ngIf="elementsContainerService.progressionGenerated.saved"> Progresion en base de datos!. </h3>
+
+        <div>
+            <canvas class="canvas-detail" #detailCanvasProgression></canvas>
+
+            <br/>
+
+            <div fxLayout="column" fxLayoutAlign="start center" >
+                <div style="width:100%">
+                    <h2>Tonica</h2>
+                    <button *ngFor="let note of notesChangered"
+                            (click)="changeTonic(note)"
+                            [ngClass]="{
+                                'active': tonic.id == note.id,
+                                '':  tonic.id != note.id
+                            }"
+                            color="primary"
+                            mat-stroked-button>{{ note.symbol }} </button>
+                </div>
+                <br>
+               
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="start center" >
+                <div style="width:100%">
+                    <h2>Escalas</h2>
+                    <button *ngFor="let scale of elementsContainerService.progressionGenerated.scales"
+                            (click)="changeScale(scale)"
+                            color="primary"
+                            mat-stroked-button> {{scale.name}} </button>
+                </div>
+                <br>
+               
+            </div>
+        </div>
+
+       
+        
+
+    </div>
+</div>

@@ -51,8 +51,8 @@ export class UserService {
     return this.http.post<any>(this.endpoint+"/chord", id, { headers: this.getHeader(localStorage.getItem('token') as string) });
   }
 
-  public removeChord(id: number):any{
-    return this.http.delete(this.endpoint + "/chord/" + id, { headers: this.getHeader(localStorage.getItem('token') as string) });
+  public removeChord(id: number):void{
+    this.http.delete(this.endpoint + "/chord/" + id, { headers: this.getHeader(localStorage.getItem('token') as string) });
   }
 
 

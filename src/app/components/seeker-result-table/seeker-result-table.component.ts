@@ -221,6 +221,7 @@ export class SeekerResultTableComponent implements OnInit, AfterViewInit{
       let isNotes:  boolean = false;
       let isOrder:  boolean = false;
       let isName:   boolean = false;
+      let isGenere: boolean = false;
 
       if( filterJSON.code != "" ) isCode = data.symbol.trim().toLocaleLowerCase().startsWith(filterJSON.code);
       else isCode = true;
@@ -276,7 +277,11 @@ export class SeekerResultTableComponent implements OnInit, AfterViewInit{
           }
       } else isOrder = true;
 
-      return isTonic && isNotes && isMinMax && isOrder && isName && isCode && isCadence && isbegin && isEnd;
+      if(filterJSON.genere.length != 0){
+        isGenere = filterJSON.genere.includes( data.id );
+      } else isGenere = true;
+
+      return isTonic && isNotes && isMinMax && isOrder && isName && isCode && isCadence && isbegin && isEnd && isGenere;
     }
   }
 

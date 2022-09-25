@@ -6,5 +6,6 @@ export interface FilterProgression extends FilterNote{
     nChords:  number,
     code:     string,
     beginChord: Chord,
-    endChord:   Chord
+    endChord:   Chord,
+    genere: number[],
 }

@@ -44,6 +44,8 @@ import { AnalizerScaleComponent } from './components/analizer-scale/analizer-sca
 import { GeneratorGuiComponent } from './components/generator-gui/generator-gui.component';
 import { IntervalsSelectorComponent } from './components/intervals-selector/intervals-selector.component';
 import { GeneratorScaleComponent } from './components/generator-scale/generator-scale.component';
+import { GradeSelectorComponent } from './components/grade-selector/grade-selector.component';
+import { GeneratorProgressionComponent } from './components/generator-progression/generator-progression.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,9 @@ import { GeneratorScaleComponent } from './components/generator-scale/generator-
     AnalizerScaleComponent,
     GeneratorGuiComponent,
     IntervalsSelectorComponent,
-    GeneratorScaleComponent
+    GeneratorScaleComponent,
+    GradeSelectorComponent,
+    GeneratorProgressionComponent
   ],
   imports: [
     BrowserModule,

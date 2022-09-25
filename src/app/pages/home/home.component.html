@@ -5,26 +5,36 @@
 
         <!--Header{ Logo y Opciones }-->
         <div fxFlex fxLayout="column" fxLayoutAlign="start center" class="sub-container">
-            <div fxLayoutAlign="space-around center" class="header">
+            <div class="header">
                 <img class="logo" src="https://logoeps.com/wp-content/uploads/2013/04/pauta-musica-vector.png">
                 
-                <mat-icon>logout</mat-icon>
             </div>
+
+
+            <button  (click)="cerrarSession()" color="primary" mat-raised-button><mat-label>Cerrar Sesión</mat-label> <mat-icon>logout</mat-icon></button>
+
+            <br><br>
+
+            <button routerLink="/home/elements_selector" routerLinkActive="routeActive" color="accent"  mat-raised-button> Home <mat-icon>home</mat-icon></button>
+            <br>
+            <br>
 
             <!--Search{ busqueda y coleccion }-->
             <div fxLayout="column" fxLayoutAlign="start center" class="search">
-                <button routerLink="/home/seeker" routerLinkActive="routeActive" mat-button> Busqueda <mat-icon>search</mat-icon></button>
-                <button routerLink="/home/collection" routerLinkActive="routeActive" mat-button> Colección <mat-icon>collections</mat-icon></button>
+                
+                <button routerLink="/home/seeker" routerLinkActive="routeActive" color="accent"  mat-raised-button> Búsqueda <mat-icon>search</mat-icon></button>
+                <br>
+                <button routerLink="/home/collection" routerLinkActive="routeActive"  color="accent"  mat-raised-button> Colección <mat-icon>collections</mat-icon></button>
             </div>
 
+            <br><br>
             <!--Herramientas{ Analizar y Generar }-->
             <div fxLayout="column" fxLayoutAlign="start center" class="search">
-                <button routerLink="/home/generator_gui" (click)="generate()" mat-raised-button color="primary">
+                <button routerLink="/home/generator_gui" routerLinkActive="routeActive" color="warn" mat-raised-button>
                     Generar
                 </button>
-            </div>
-            <div fxLayout="column" fxLayoutAlign="start center" class="search">
-                <button routerLink="/home/generator" (click)="generate()" mat-button [disabled]="elementsContainerService.musicalElementsAnalized.isEmpty">
+                <br>
+                <button routerLink="/home/generator"   routerLinkActive="routeActive" color="warn" mat-raised-button [disabled]="elementsContainerService.musicalElementsAnalized.isEmpty">
                     Analizar
                     <mat-icon>arrow_forward_ios</mat-icon>
                 </button>

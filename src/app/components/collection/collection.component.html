@@ -3,7 +3,6 @@
 <mat-divider></mat-divider>
 
 <div class="select-elements-container">
-    <app-starmony-header [back]="false"></app-starmony-header>
     <mat-divider></mat-divider>
     <h2>Elementos Seleccionados</h2>
     <div class="example-action-buttons">
@@ -33,7 +32,7 @@
                         <div fxLayout="column" fxLayoutAlign="start center" class="config-menu" *ngIf=" idConcreteChordSelected == element.id_concrete_chord">
                             
                             <button class="config-button" (click)="analizeChord(element, true)" mat-raised-button>Analisis</button>
-                            <button class="config-button" mat-raised-button>Eliminar de la Colección</button>
+                            <button class="config-button" (click)="eliminarAcorde(element)" mat-raised-button>Eliminar de la Colección</button>
                         </div>
 
                     </div>
@@ -65,7 +64,7 @@
                                             
                     <div class="config-menu" *ngIf=" idConcreteScaleSelected == element.id_concrete_scale">
                         <button class="config-button" (click)="analizeScale(element, true)" mat-raised-button>Analizar</button>
-                        <button class="config-button" mat-raised-button>Añadir a Colección</button>
+                        <button class="config-button" (click)="eliminarEscala(element)" mat-raised-button>Eliminar a Colección</button>
                     </div>
 
                 </div>
@@ -94,36 +93,13 @@
                                                                 
                     <div class="config-menu" *ngIf=" idConcreteProgressionSelected == element.id_concrete_progression">
                         <button class="config-button" (click)="analizeProgression(element, true)" mat-raised-button>Analizar</button>
-                        <button class="config-button" mat-raised-button>Añadir a Colección</button>
+                        <button class="config-button" (click)="eliminarProgression(element)" mat-raised-button>Eliminar a Colección</button>
                     </div>
 
                 </div>
             </div>
         </mat-expansion-panel>
 
-        
-        <mat-expansion-panel [disabled]="elementsContainerService.userConcreteIntervals.length == 0">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                Intervalos
-                </mat-panel-title>
-                <mat-panel-description>
-                {{ elementsContainerService.userConcreteIntervals.length }} elementos.
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            <div class="elementsContainer">
-                <div class="elementContainer" (click)="selectConcreteInterval(element.id_concrete_interval)" fxLayout="row" fxLayoutAlign="start center" *ngFor="let element of userConcreteIntervals">
-                    <button class="elementLarge"
-                            [ngClass]="{
-                                'selected': idConcreteIntervalSelected == element.id_concrete_interval,
-                                '': idConcreteIntervalSelected != element.id_concrete_interval
-                            }"
-                            mat-stroked-button>
-                        {{element.name}} {{element.firstNote.symbol}} - {{element.lastNote.symbol}}
-                    </button>
-                </div>
-            </div>
-        </mat-expansion-panel>
         
       </mat-accordion>
 </div>

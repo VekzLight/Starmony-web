@@ -14,4 +14,5 @@ export interface ScaleGenerated {
     concreteScaleGrades:  { [key: string]: ConcreteGradeScales };
     progressionGrades:    { [key: string]: ProgressionGrade };
     concreteProgressions: { [key: string]: ConcreteProgression };
+    saved: boolean;
 }

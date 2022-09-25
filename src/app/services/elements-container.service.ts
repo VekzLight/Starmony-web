@@ -6,12 +6,14 @@ import { ConcreteGradeScales } from '../interfaces/concreteGradeScales.interface
 import { ConcreteInterval } from '../interfaces/concreteInterval.interface';
 import { ConcreteProgression } from '../interfaces/concreteProgression.interface';
 import { ConcreteScale } from '../interfaces/concreteScale.interface';
+import { ConcreteScaleME } from '../interfaces/concreteScaleME.interface';
 import { Interval } from '../interfaces/interval.interface';
 import { MusicalElementsAnalized } from '../interfaces/musicalElementsAnalize.interface';
 import { MusicalElementsResponse } from '../interfaces/musicalElementsResponse.interface';
 import { Note } from '../interfaces/note.interface';
 import { Progression } from '../interfaces/progression.interface';
 import { ProgressionAnalized } from '../interfaces/progressionAnalized.interface';
+import { ProgressionGenerated } from '../interfaces/progressionGenerated.interface';
 import { Scale } from '../interfaces/scale.interface';
 import { ScaleAnalized } from '../interfaces/scaleAnalized.interface';
 import { ScaleGenerated } from '../interfaces/scaleGenerated.interface';
@@ -19,7 +21,9 @@ import { ScaleGrade } from '../interfaces/scaleGrade.interface';
 import { Tag } from '../interfaces/tag.interface';
 import { TagProgression } from '../interfaces/TagProgression.interface';
 import { TagScale } from '../interfaces/tagScale.interface';
+import { AnalyzerService } from './analyzer.service';
 import { SeekerResultElementsService } from './seeker-result-elements.service';
+import { SignalsService } from './signals.service';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +54,7 @@ export class ElementsContainerService {
 
   intervalsSelectedGen: ConcreteInterval[] = [];
   scaleGenerated: ScaleGenerated;
+  progressionGenerated: ProgressionGenerated;
 
   concreteScaleGrades: ConcreteGradeScales[] = [];
   scaleGrades:  ScaleGrade[] = [];
@@ -88,7 +93,11 @@ export class ElementsContainerService {
     isEmpty: true
   }
 
-  constructor(private seekerResultElementsService: SeekerResultElementsService) {
+  constructor(
+    private seekerResultElementsService: SeekerResultElementsService,
+    private signalsService: SignalsService,
+    private analyzer: AnalyzerService
+    ) {
     let musicalElements = JSON.parse( localStorage.getItem("musicalElementsAnalized") || JSON.stringify( {isEmpty: true} as MusicalElementsAnalized ) );
     if( !musicalElements.isEmpty ) this.musicalElementsAnalized = musicalElements;
 
@@ -99,8 +108,12 @@ export class ElementsContainerService {
     this.progressionAnalized = JSON.parse(localStorage.getItem("progressionAnalized") || '{}');
 
     this.scaleAnalizedResp = JSON.parse(localStorage.getItem("scaleAnalizedResp") || JSON.stringify( { exist: false } as ScaleAnalized ));
-    this.scaleAnalized = JSON.parse(localStorage.getItem("scaleAnalized") || JSON.stringify({id: - 1} as ConcreteScale));
+    this.scaleAnalized = JSON.parse( localStorage.getItem("scaleAnalized") || JSON.stringify({id: - 1} as ConcreteScale) );
 
+    this.scaleGenerated = JSON.parse( localStorage.getItem("scaleGenerated") || JSON.stringify( {} as ScaleGenerated ) );
+    this.progressionGenerated = JSON.parse( localStorage.getItem("progressionGenerated") || JSON.stringify( {} as ProgressionGenerated ) );
+
+    localStorage.setItem( "scaleDetail", JSON.stringify({id: - 1} as ConcreteScale) );
     this.scaleDetail = JSON.parse(localStorage.getItem("scaleDetail") || '{  }');
     this.intervalDetail = JSON.parse(localStorage.getItem("intervalDetail") || '{}');
     this.progressionDetail = JSON.parse(localStorage.getItem("progressionDetail") || '{}');
@@ -110,6 +123,31 @@ export class ElementsContainerService {
     this.userConcreteScales = JSON.parse(localStorage.getItem('userConcreteScales') || '[]');
     this.userConcreteProgressions = JSON.parse(localStorage.getItem('userConcreteProgressions') || '[]');
 
+
+    if( this.signalsService.progressionUpdate ){
+      this.analyzer.getAllProgressions().subscribe(resp=>{ this.progressions = resp; });
+      this.analyzer.getAllConcreteProgressions().subscribe(resp=>{ this.concreteProgressions = resp; });
+
+      localStorage.setItem("progressions", JSON.stringify( this.progressions ));
+      localStorage.setItem("concreteProgressions", JSON.stringify( this.concreteProgressions ));
+
+      this.signalsService.progressionUpdate = false;
+      localStorage.setItem("progressionUpdate", JSON.stringify(false));
+    }
+
+    if( this.signalsService.scaleUpdate ){
+
+      this.analyzer.getAllScales().subscribe(resp=>{ this.scales = resp; });
+      this.analyzer.getAllConcreteScales().subscribe(resp=>{ this.concreteScales = resp; });
+
+
+
+      localStorage.setItem("scales", JSON.stringify( this.scales ));
+      localStorage.setItem("concreteScales", JSON.stringify( this.concreteScales ));
+
+      this.signalsService.scaleUpdate = false;
+      localStorage.setItem("scaleUpdate", JSON.stringify(false));
+    }
   }
 
 

@@ -48,7 +48,6 @@ export class AwaitingComponent implements OnInit {
     this.elementsContainerService.concreteChords  = JSON.parse( localStorage.getItem("concreteChords") || '{}');
     this.seekerResultElementsService.selectedChords = JSON.parse( localStorage.getItem("concreteChordsSelecteds") || '[]');
 
-    
     this.element = "escalas";
     this.elementsContainerService.scales  = JSON.parse( localStorage.getItem("scales") || '{}');
     this.elementsContainerService.concreteScales  = JSON.parse( localStorage.getItem("concreteScales") || '{}');

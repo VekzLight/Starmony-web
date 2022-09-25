@@ -104,14 +104,16 @@ export class AnalizerProgressionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    console.log( this.elementsContainerService.progressionDetail );
+    console.log( this.elementsContainerService.scaleAnalized );
   }
 
   public rePaintProgression (ctx:CanvasRenderingContext2D){
     ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
 
-    this.cts.drawRectText(ctx, 330, 10, this.elementsContainerService.scaleDetail.tonic.name + " " +this.elementsContainerService.scaleDetail.symbol);
+    this.cts.drawRectText(ctx, 330, 10, this.elementsContainerService.scaleAnalized.tonic.name + " " +this.elementsContainerService.scaleAnalized.symbol);
     this.drawLinesProgressionScale(ctx, 380, 10 + (this.cts.fontSize*2));
-    this.cts.drawRectText(ctx, 330, 410 + (Object.values( this.elementsContainerService.progressionDetail.concreteGrades ).length ) * 50, this.elementsContainerService.progressionDetail.symbol);
+    this.cts.drawRectText(ctx, 330, 410 + (Object.values( this.elementsContainerService.progressionDetail.concreteGrades ).length ) * 5, this.elementsContainerService.progressionDetail.symbol);
   }
 
   public trackItem (index: number, item: (ConcreteInterval | undefined)) {
@@ -236,7 +238,7 @@ export class AnalizerProgressionComponent implements OnInit, AfterViewInit {
 
   private repaintCtxChord( ctx: CanvasRenderingContext2D ){
     ctx.clearRect(0,0,  ctx.canvas.width, ctx.canvas.height);
-    this.cts.drawRectText(ctx, 285, 10, this.elementsContainerService.scaleDetail.tonic.name + " " +this.elementsContainerService.scaleDetail.symbol);
+    this.cts.drawRectText(ctx, 285, 10, this.elementsContainerService.scaleAnalized.tonic.name + " " +this.elementsContainerService.scaleAnalized.symbol);
     this.drawLinesGrades(ctx, 330, 10 + (this.cts.fontSize*2));
   }
 
@@ -302,6 +304,7 @@ export class AnalizerProgressionComponent implements OnInit, AfterViewInit {
       this.elementsContainerService.progressionDetail = concreteProgression;
       if(concreteScale)
         this.elementsContainerService.scaleDetail = concreteScale;
+      
       localStorage.setItem("progressionDetail", JSON.stringify(concreteProgression));
       localStorage.setItem("scaleDetail", JSON.stringify(concreteScale));
       localStorage.setItem("relatedAnalized", "progression")
@@ -317,17 +320,18 @@ export class AnalizerProgressionComponent implements OnInit, AfterViewInit {
   }
 
   private drawLinesGrades(ctx: CanvasRenderingContext2D, x:number, y:number):void{
-    let notes = Object.values(this.elementsContainerService.scaleDetail.notes).slice(0,-1);
+    let notes = Object.values(this.elementsContainerService.scaleAnalized.notes).slice(0,-1);
     let positions = 800 / 9;
 
     let indexPosition = positions;
     for(let key in notes){
-      let scaleGrade = this.elementsContainerService.concreteScaleGrades.find( sg => sg.idConcreteScaleGrade == this.elementsContainerService.scaleDetail.id_concrete_scale );
+      let scaleGrade = this.elementsContainerService.concreteScaleGrades.find( sg => sg.idConcreteScaleGrade == this.elementsContainerService.scaleAnalized.id_concrete_scale );
       
 
       ctx.strokeStyle = this.signalsService.colors[ +key + 1 ];
 
-
+      console.log("Progression analized: "+this.elementsContainerService.progressionAnalized);
+      console.log("Grados de la escala" + scaleGrade);
       if( Object.values(this.elementsContainerService.progressionAnalized.concreteGrades).some( concreteChord => concreteChord.id_concrete_chord == scaleGrade?.concreteGrades[+key + 1].id_concrete_chord) ){
         ctx.fillStyle = ctx.strokeStyle
         ctx.fillRect(indexPosition - 5, y + 55, 75, 230 );
@@ -460,7 +464,7 @@ export class AnalizerProgressionComponent implements OnInit, AfterViewInit {
 
   private drawLinesProgressionScale(ctx: CanvasRenderingContext2D, x:number, y:number):void{
 
-    let notes = Object.values(this.elementsContainerService.scaleDetail.notes).slice(0,-1);
+    let notes = Object.values(this.elementsContainerService.scaleAnalized.notes).slice(0,-1);
     let positions = 800 / 9;
 
     let indexPosition = positions;
@@ -472,7 +476,7 @@ export class AnalizerProgressionComponent implements OnInit, AfterViewInit {
 
       ctx.strokeStyle = this.signalsService.colors[ +key + 1 ]
       
-      let scaleGrade = this.elementsContainerService.concreteScaleGrades.find( sg => sg.idConcreteScaleGrade == this.elementsContainerService.scaleDetail.id_concrete_scale );
+      let scaleGrade = this.elementsContainerService.concreteScaleGrades.find( sg => sg.idConcreteScaleGrade == this.elementsContainerService.scaleAnalized.id_concrete_scale );
 
       ctx.strokeRect(indexPosition - 5, y + 55, 75, 110 );
       this.cts.drawRectTextNotesLarge(ctx, indexPosition, y + 180, scaleGrade?.concreteGrades[+key + 1].tonic.symbol + "" + scaleGrade?.concreteGrades[+key + 1].symbol+"");

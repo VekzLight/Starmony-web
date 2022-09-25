@@ -22,12 +22,18 @@ export class IntervalsSelectorComponent implements OnInit {
   constructor(
     public elementsContainerService:ElementsContainerService,
     public generatorService:GeneratorService,
-    public signalsService :SignalsService
+    public signalsService :SignalsService,
+    private router: Router
     ) {
-    
+      this.elementsContainerService.intervalsSelectedGen = [];
+      this.elementsContainerService.notesSelected = [];
   }
 
   ngOnInit(): void {
+    
+    this.elementsContainerService.intervalsSelectedGen = [];
+    this.elementsContainerService.notesSelected = [];
+    
     this.intervalsSimples = this.elementsContainerService.concreteIntervals.filter( concreteInterval => (concreteInterval.semitones <=  11) && (concreteInterval.firstNote.id == 1));
   }
 
@@ -69,8 +75,14 @@ export class IntervalsSelectorComponent implements OnInit {
 
   public generarEscala():void{
     this.generatorService.generateCompleteScale(this.code).subscribe( resp =>{
+      localStorage.setItem("scaleGenerated", JSON.stringify(resp));
+      localStorage.setItem("generated", JSON.stringify(true));
+
+
       this.elementsContainerService.scaleGenerated = resp;
       this.signalsService.generated = true;
+
+      this.router.navigate(['/home/generator_scale']);
     });
   }
 }

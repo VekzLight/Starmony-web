@@ -26,12 +26,17 @@ export class SignalsService {
   colors: string[] = [ "#f82d97", "#f82d97", "#01c4e7","#c501e2","#2ef8a0","#ff0534","#e7c500", "#6f3460" ];
   grades: string[] = [ "Primera", "Segunda","Tercera","Cuarta","Quinta","Sexta","Septima","Octava","Novena","Decima", "Onceava", "Doceava", "Treceava" ];
   gradesM: string[] = [ "Primer", "Segundo","Tercer","Cuarto","Quinto","Sexto","Septimo","Octavo","Noveno","Decimo", "Onceavo", "Doceavo", "Treceavo" ];
-  gradesI: string[] = [ "I", "II","III","IV","V","VI","VII","VIII", "IX", "X" ];
+  gradesI: string[] = [ "I", "II","III","IV","V","VI","VII","VIII", "IX", "X", "XI", "XII"];
+
+  progressionUpdate: boolean = false;
+  scaleUpdate: boolean = false;
 
   constructor() {
     this.relatedAnalized = localStorage.getItem("relatedAnalized") || '{}';
     this.typeElementAnalized = localStorage.getItem("typeElementAnalized") || '{}';
     this.dominanceME = localStorage.getItem("dominanceME") || 'null';
+    this.progressionUpdate = JSON.parse(localStorage.getItem("progressionUpdate") || JSON.stringify(false));
+    this.scaleUpdate = JSON.parse(localStorage.getItem("scaleUpdate") || JSON.stringify(false));
   }
 
   public ObjectValues(notes: {[key:number]: Note}): Note[]{

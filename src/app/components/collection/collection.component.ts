@@ -8,6 +8,7 @@ import { AnalyzerService } from 'src/app/services/analyzer.service';
 import { ElementsContainerService } from 'src/app/services/elements-container.service';
 import { SeekerResultElementsService } from 'src/app/services/seeker-result-elements.service';
 import { SignalsService } from 'src/app/services/signals.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-collection',
@@ -32,7 +33,8 @@ export class CollectionComponent implements OnInit {
     public analyzerService:AnalyzerService,
     public seekerResultElementsService:SeekerResultElementsService,
     public signalsService: SignalsService,
-    public router: Router
+    public router: Router,
+    public userService: UserService
   ) {
 
   }
@@ -134,23 +136,44 @@ export class CollectionComponent implements OnInit {
   public analizeProgression(concreteProgression: ConcreteProgression, type: boolean):void{
     let concreteScale = this.elementsContainerService.concreteScales.find( concreteScale => concreteScale.id_concrete_scale == concreteProgression.id_concrete_scale );
 
-    if(concreteScale)
+    if(concreteScale){
       this.analyzerService.analizeConcreteScale(concreteScale.id_concrete_scale).subscribe( resp => {
         localStorage.setItem("scaleAnalizedResp", JSON.stringify(resp));
         this.elementsContainerService.scaleAnalizedResp = resp;
       });
 
 
-    localStorage.setItem("scaleAnalized", JSON.stringify( concreteScale ));
-    localStorage.setItem("progressionAnalized", JSON.stringify(concreteProgression));
-    localStorage.setItem("typeElementAnalized", "progression");
+      localStorage.setItem("scaleAnalized", JSON.stringify( concreteScale ));
+      localStorage.setItem("progressionAnalized", JSON.stringify(concreteProgression));
+      localStorage.setItem("typeElementAnalized", "progression");
 
-    if(concreteScale)
+      this.elementsContainerService.scaleDetail = concreteScale;
       this.elementsContainerService.scaleAnalized = concreteScale;
-    this.elementsContainerService.progressionAnalized = concreteProgression;
-    this.signalsService.typeElementAnalized = "progression";
-    this.router.navigate(['/home/analizer']);
+      this.elementsContainerService.progressionAnalized = concreteProgression;
+      this.signalsService.typeElementAnalized = "progression";
+      this.router.navigate(['/home/analizer']);
+    }
+
   }
 
+  public eliminarAcorde(concreteChord: ConcreteChord):void{
+    this.userService.removeChord(concreteChord.id_concrete_chord);
+    this.elementsContainerService.userConcreteChords = this.elementsContainerService.userConcreteChords.filter( it => it != concreteChord.id_concrete_chord );
+    localStorage.setItem("userConcreteChords", JSON.stringify( this.elementsContainerService.userConcreteChords));
+    this.userConcreteChords = this.elementsContainerService.concreteChords.filter( _it => this.elementsContainerService.userConcreteChords.includes( _it.id_concrete_chord ) ) 
+  }
 
+  public eliminarEscala(concreteScale: ConcreteScale):void{
+    this.userService.removeScale(concreteScale.id_concrete_scale);
+    this.elementsContainerService.userConcreteScales = this.elementsContainerService.userConcreteScales.filter( it => it != concreteScale.id_concrete_scale );
+    localStorage.setItem("userConcreteScales", JSON.stringify( this.elementsContainerService.userConcreteScales));
+    this.userConcreteScales = this.elementsContainerService.concreteScales.filter( _it => this.elementsContainerService.userConcreteScales.includes( _it.id_concrete_scale ) ) 
+  }
+
+  public eliminarProgression(concreteProgression: ConcreteProgression):void{
+    this.userService.removeProgression(concreteProgression.id_concrete_progression);
+    this.elementsContainerService.userConcreteProgressions = this.elementsContainerService.userConcreteProgressions.filter( it => it != concreteProgression.id_concrete_progression );
+    localStorage.setItem("userConcreteProgressions", JSON.stringify( this.elementsContainerService.userConcreteProgressions));
+    this.userConcreteProgressions = this.elementsContainerService.concreteProgressions.filter( _it => this.elementsContainerService.userConcreteProgressions.includes( _it.id_concrete_progression ) ) 
+  }
 }
