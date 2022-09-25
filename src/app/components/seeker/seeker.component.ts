@@ -30,6 +30,7 @@ export class SeekerComponent implements OnInit {
       public signalsService: SignalsService,
       public elementsContainerService: ElementsContainerService,
       private location: Location,
+      private analyzer: AnalyzerService,
       private router: Router) {
 
     this.filteredOptions = this.searchControl.valueChanges.pipe(
@@ -43,6 +44,30 @@ export class SeekerComponent implements OnInit {
 
   ngOnInit(): void {
     if( this.elementsContainerService.notes.length == 0 )  this.router.navigate(["/home"]);
+    if( this.signalsService.progressionUpdate ){
+      this.analyzer.getAllProgressions().subscribe(resp=>{ this.elementsContainerService.progressions = resp; });
+      this.analyzer.getAllConcreteProgressions().subscribe(resp=>{ this.elementsContainerService.concreteProgressions = resp; });
+
+      localStorage.setItem("progressions", JSON.stringify( this.elementsContainerService.progressions ));
+      localStorage.setItem("concreteProgressions", JSON.stringify( this.elementsContainerService.concreteProgressions ));
+
+      this.signalsService.progressionUpdate = false;
+      localStorage.setItem("progressionUpdate", JSON.stringify(false));
+    }
+
+    if( this.signalsService.scaleUpdate ){
+
+      this.analyzer.getAllScales().subscribe(resp=>{ this.elementsContainerService.scales = resp; });
+      this.analyzer.getAllConcreteScales().subscribe(resp=>{ this.elementsContainerService.concreteScales = resp; });
+
+
+
+      localStorage.setItem("scales", JSON.stringify( this.elementsContainerService.scales ));
+      localStorage.setItem("concreteScales", JSON.stringify( this.elementsContainerService.concreteScales ));
+
+      this.signalsService.scaleUpdate = false;
+      localStorage.setItem("scaleUpdate", JSON.stringify(false));
+    }
   }
 
   // funcion para el autocompletado

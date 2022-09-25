@@ -22,12 +22,8 @@ export class HomeComponent implements OnInit{
     if( localStorage.getItem('token') == null ) this.router.navigate(['login', 'inicio']);
   }
 
-  public generate():void{
-  }
-
   public cerrarSession():void{
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
+    window.localStorage.clear();
     this.router.navigate(['login', 'inicio']);
   }
 

@@ -41,6 +41,11 @@ import { AnalizerChordComponent } from './components/analizer-chord/analizer-cho
 import { AnalizerIntervalComponent } from './components/analizer-interval/analizer-interval.component';
 import { AnalizerProgressionComponent } from './components/analizer-progression/analizer-progression.component';
 import { AnalizerScaleComponent } from './components/analizer-scale/analizer-scale.component';
+import { GeneratorGuiComponent } from './components/generator-gui/generator-gui.component';
+import { IntervalsSelectorComponent } from './components/intervals-selector/intervals-selector.component';
+import { GeneratorScaleComponent } from './components/generator-scale/generator-scale.component';
+import { GradeSelectorComponent } from './components/grade-selector/grade-selector.component';
+import { GeneratorProgressionComponent } from './components/generator-progression/generator-progression.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +73,12 @@ import { AnalizerScaleComponent } from './components/analizer-scale/analizer-sca
     AnalizerChordComponent,
     AnalizerIntervalComponent,
     AnalizerProgressionComponent,
-    AnalizerScaleComponent
+    AnalizerScaleComponent,
+    GeneratorGuiComponent,
+    IntervalsSelectorComponent,
+    GeneratorScaleComponent,
+    GradeSelectorComponent,
+    GeneratorProgressionComponent
   ],
   imports: [
     BrowserModule,

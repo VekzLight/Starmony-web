@@ -13,7 +13,8 @@ import * as _ from 'lodash';
 })
 export class TabConfigElementComponent implements OnInit {
 
-
+  generes: string[] = [];
+  genereSelected: string;
   // Simbolos de los acordes.
   types: string[] = [];
   type: string = "";
@@ -27,6 +28,10 @@ export class TabConfigElementComponent implements OnInit {
 
   ngOnInit(): void {
     this.signalsService.tabFilter.setValue(0);
+
+    let _g = this.elementsContainerService.tagProgressions.map( tp => tp.tagDTO.name );
+
+    this.generes = _g.filter( (element, index) => _g.indexOf(element) === index );
   }
 
   public selectType(type: Chord):void{
@@ -43,6 +48,16 @@ export class TabConfigElementComponent implements OnInit {
 
     this.seekerResultElements.filterInterval.type = nType;
     this.seekerResultElements.dataSourceInterval.filter = JSON.stringify(this.seekerResultElements.filterInterval);
+  }
+
+  public selectGenere(genere: string):void{
+    let _tagProgression = this.elementsContainerService.tagProgressions.filter( tp => tp.tagDTO.name == genere );
+    let progressions = _tagProgression.map( tp => tp.progressionDTO.id );
+
+    progressions = progressions.filter( (p,i) => {return progressions.indexOf(p) === i} );
+
+    this.seekerResultElements.filterProgression.genere = progressions;
+    this.seekerResultElements.dataSourceProgression.filter = JSON.stringify(this.seekerResultElements.filterProgression);
   }
 
   public selectDirection(type: string):void{

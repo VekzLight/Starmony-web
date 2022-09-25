@@ -92,6 +92,24 @@ export class SelectElementsComponent implements OnInit {
     this.idConcreteIntervalSelected = -1;
   }
 
+
+  public quitChord(concreteChord: ConcreteChord):void{
+    this.seekerResultElementsService.selectedChords = this.seekerResultElementsService.selectedChords.filter( it => it.id_concrete_chord != concreteChord.id_concrete_chord );
+    localStorage.setItem("concreteChordsSelecteds", JSON.stringify(this.seekerResultElementsService.selectedChords));
+  }
+  public quitScale(concreteScale: ConcreteScale):void{
+    this.seekerResultElementsService.selectedScales = this.seekerResultElementsService.selectedScales.filter( it => it.id_concrete_scale != concreteScale.id_concrete_scale );
+    localStorage.setItem("concreteScalesSelecteds", JSON.stringify(this.seekerResultElementsService.selectedScales));
+  }
+  public quitProgression(concreteProgression: ConcreteProgression):void{
+    this.seekerResultElementsService.selectedProgressions = this.seekerResultElementsService.selectedProgressions.filter( it => it.id_concrete_progression != concreteProgression.id_concrete_progression );
+    localStorage.setItem("concreteProgressionsSelecteds", JSON.stringify(this.seekerResultElementsService.selectedProgressions));
+  }
+  public quitInterval(concreteInterval: ConcreteInterval):void{
+    this.seekerResultElementsService.selectedIntervals = this.seekerResultElementsService.selectedIntervals.filter( it => it.id_concrete_interval != concreteInterval.id_concrete_interval );
+    localStorage.setItem("concreteIntervalsSelecteds", JSON.stringify(this.seekerResultElementsService.selectedIntervals));
+  }
+
   public checkInterval(id: number):void{ 
     if(!this.elementsContainerService.musicalElementsAnalized.concreteIntervalIds.includes(id)) this.elementsContainerService.addConcreteIntervalME(id);
     else this.elementsContainerService.removeConcreteIntervaldME(id);
@@ -141,6 +159,8 @@ export class SelectElementsComponent implements OnInit {
     if(concreteChordRes)
       this.seekerResultElementsService.selectedChords[index] = concreteChordRes;
       console.log(index, concreteChord.tonic.id, idNote, concreteChordRes);
+
+    localStorage.setItem("concreteChordsSelecteds", JSON.stringify(this.seekerResultElementsService.selectedChords));
   }
   
   public downToneChord(concreteChord: ConcreteChord):void{
@@ -149,6 +169,8 @@ export class SelectElementsComponent implements OnInit {
     let concreteChordRes = this.elementsContainerService.concreteChords.find( _concreteChord => (_concreteChord.id == concreteChord.id) && ( _concreteChord.tonic.id == idNote));
     if(concreteChordRes)
       this.seekerResultElementsService.selectedChords[index] = concreteChordRes;
+
+    localStorage.setItem("concreteChordsSelecteds", JSON.stringify(this.seekerResultElementsService.selectedChords));
   }
 
   public upToneScale(concreteScale: ConcreteScale):void{
@@ -196,23 +218,33 @@ export class SelectElementsComponent implements OnInit {
 
   public analizeProgression(concreteProgression: ConcreteProgression, type: boolean):void{
     let concreteScale = this.elementsContainerService.concreteScales.find( concreteScale => concreteScale.id_concrete_scale == concreteProgression.id_concrete_scale );
-    if(concreteScale)
-    this.analyzerService.analizeConcreteScale(concreteScale.id_concrete_scale).subscribe( resp => {
+    if(concreteScale){
 
-      localStorage.setItem("scaleAnalizedResp", JSON.stringify(resp));
+      this.analyzerService.analizeConcreteScale(concreteScale.id_concrete_scale).subscribe( resp => {
 
-      localStorage.setItem("scaleAnalized", JSON.stringify( concreteScale ));
-      localStorage.setItem("progressionAnalized", JSON.stringify(concreteProgression));
-      localStorage.setItem("typeElementAnalized", "progression");
-  
-      if(concreteScale)
-        this.elementsContainerService.scaleAnalized = concreteScale;
-      this.elementsContainerService.progressionAnalized = concreteProgression;
-      this.signalsService.typeElementAnalized = "progression";
-      this.router.navigate(['/home/analizer']);
-    });
+        localStorage.setItem("scaleAnalizedResp", JSON.stringify(resp));
 
 
+        localStorage.setItem("scaleAnalized", JSON.stringify( concreteScale ));
+        localStorage.setItem("scaleDetail", JSON.stringify( concreteScale ));
+        localStorage.setItem("progressionAnalized", JSON.stringify(concreteProgression));
+        localStorage.setItem("typeElementAnalized", "progression");
+        localStorage.setItem("progressionDetail", JSON.stringify(concreteProgression));
+    
+        if(concreteScale){
+          this.elementsContainerService.scaleAnalized = concreteScale;
+          this.elementsContainerService.scaleDetail = concreteScale;
+        }
+
+        this.elementsContainerService.progressionAnalized = concreteProgression;
+        this.elementsContainerService.progressionDetail = concreteProgression;
+        this.signalsService.typeElementAnalized = "progression";
+        this.router.navigate(['/home/analizer']);
+
+      });
+
+
+    }
 
   }
 

@@ -52,6 +52,7 @@ export class SeekerResultElementsService{
     beginChord: {id:-1, name:"", symbol:"", code:""},
     endChord:   {id:-1, name:"", symbol:"", code:""},
 
+    genere:     [],
     name:       "",
     min:        1,
     max:        12,

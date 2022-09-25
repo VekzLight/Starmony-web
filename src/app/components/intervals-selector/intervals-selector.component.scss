@@ -1,0 +1,30 @@
+@import "~@angular/material/theming";
+@import '../../../assets/styles/neon.scss';
+
+.interval{
+    margin: 5px;
+}
+
+.interval.active{
+    background-color: mat-color($palette-primary,900);
+    color: mat-contrast($palette-primary,900);
+}
+
+.interval.tonic{
+    background-color: mat-color($palette-secondary,900);
+    color: mat-contrast($palette-secondary,900);
+}
+
+.note{
+    margin: 5px;
+}
+
+.note.active{
+    background-color: mat-color($palette-primary,900);
+    color: mat-contrast($palette-primary,900);
+}
+
+.note.tonic{
+    background-color: mat-color($palette-secondary,900);
+    color: mat-contrast($palette-secondary,900);
+}

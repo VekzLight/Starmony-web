@@ -145,7 +145,7 @@ export class AnalizerScaleComponent implements OnInit, AfterViewInit{
 
   private repaintCtxScale( ctx: CanvasRenderingContext2D ){
     ctx.clearRect(0,0,  ctx.canvas.width,  ctx.canvas.height);
-    this.cts.drawRectText(ctx, 350, 10, this.elementsContainerService.chordAnalized.tonic.name + " " +this.elementsContainerService.chordAnalized.symbol + " ");
+    this.cts.drawRectText(ctx, 350, 10, this.elementsContainerService.scaleAnalized.tonic.name + " " +this.elementsContainerService.scaleAnalized.symbol + " ");
     this.drawLinesScaleIntervals(ctx, 380, 10 + (this.cts.fontSize * 2));
   }
 

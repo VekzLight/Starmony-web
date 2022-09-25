@@ -1,0 +1,20 @@
+
+<!--<app-generator-scale style="position: absolute; z-index: 5;" *ngIf=" signalsService.generated == true" ></app-generator-scale>-->
+<app-starmony-header [back]="true"></app-starmony-header>
+
+<mat-divider></mat-divider>
+
+
+
+
+
+
+<mat-tab-group mat-align-tabs="center" (selectedIndexChange)="signalsService.tabFilter.setValue($event)">
+    <mat-tab label="Escalas">
+        <app-intervals-selector></app-intervals-selector>
+    </mat-tab>
+    <mat-tab label="Progressiones">
+        <app-grade-selector></app-grade-selector> 
+    </mat-tab>
+    
+</mat-tab-group>

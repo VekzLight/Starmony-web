@@ -1,0 +1,58 @@
+<app-starmony-header [back]="true"></app-starmony-header>
+
+<div class="container">
+    
+    <div class="info">
+        <h2>Escala Generada</h2>
+        <button mat-raised-button *ngIf="!elementsContainerService.scaleGenerated.saved && savedScale == false" (click)="saveScale()"  color="primary"> Guardar </button>
+        <h3 style="color:red" *ngIf="elementsContainerService.scaleGenerated.saved"> Escala en base de datos!. </h3>
+
+        
+
+        <div>
+            <canvas class="canvas-detail" #detailCanvasIntervals></canvas>
+        
+            <br/>
+
+            <div fxLayout="column" fxLayoutAlign="start center" >
+                <div style="width:100%">
+                    <h2>Tonica</h2>
+                    <button *ngFor="let note of notesChangered"
+                            (click)="changeTonic(note)"
+                            [ngClass]="{
+                                'active': tonic.id == note.id,
+                                '':  tonic.id != note.id
+                            }"
+                            color="primary"
+                            mat-stroked-button>{{ note.symbol }} </button>
+                </div>
+                <br>
+                <div style="width:100%">
+                    <h2>Intervalos</h2>
+                    <button *ngFor="let concreteInterval of concreteIntervalsFiltered" 
+                            (click)="selectInterval(concreteInterval.id_concrete_interval)"
+                            mat-stroked-button>{{ searchInterval(concreteInterval.id_concrete_interval) }} </button>
+                </div>
+
+            </div>
+        </div>
+
+        <canvas [ngClass]="{
+                    'notDisplay': concreteProgresionSize == 0,
+                    '': concreteProgresionSize != 0
+                }"
+                class="canvas-detail" #detailCanvasProgression></canvas>
+
+        <div style="width:100%" *ngIf="concreteProgresionSize != 0">
+            <h2>Progressiones</h2>
+            <button (click)="progressionDetail(concreteProgression)" *ngFor="let concreteProgression of concreteProgressiones" mat-stroked-button>{{ searchProgression(concreteProgression) }}  </button>
+        </div>
+        <br>
+        <br>
+        <div style="width:100%" *ngIf="concreteProgresionSize == 0">
+            <h2>Algunos acordes de los grados musicales no estan definidos aun,
+            por lo tanto no existen progresiones de acordes para esta escala.</h2>
+        </div>
+
+    </div>
+</div>

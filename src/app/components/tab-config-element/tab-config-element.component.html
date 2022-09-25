@@ -2,7 +2,7 @@
   <mat-tab label="Acordes">
 
     <mat-form-field appearance="fill">
-      <mat-label>Typo</mat-label>
+      <mat-label>Tipo</mat-label>
       <mat-select [ngModel]="type" (ngModelChange)="selectType($event)">
         <mat-option *ngFor="let type of elementsContainerService.chords" [value]="type" > {{type.symbol}} </mat-option>
       </mat-select>
@@ -33,10 +33,10 @@
     </mat-form-field>
 
     <mat-form-field class="search-full-width" appearance="fill">
-      <mat-label>Codigo: "T-T-sT-T-T-T-sT-T"</mat-label>
+      <mat-label>Código: "T-T-sT-T-T-T-sT-T"</mat-label>
       <input type="text"
-              placeholder="Codigo"
-              aria-label="Codigo"
+              placeholder="Código"
+              aria-label="Código"
               (keyup)="codeFilter($event)"
               matInput
              />
@@ -109,10 +109,10 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field class="search-full-width" appearance="fill">
-      <mat-label>Codigo: "I-IV-V-I"</mat-label>
+      <mat-label>Código: "I-IV-V-I"</mat-label>
       <input type="text"
-              placeholder="Codigo"
-              aria-label="Codigo"
+              placeholder="Código"
+              aria-label="Código"
               (keyup)="codeProgressionFilter($event)"
               matInput
              />
@@ -129,9 +129,13 @@
         <mat-option *ngFor="let type of elementsContainerService.chords" [value]="type" > {{type.symbol}} </mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Género Musical</mat-label>
+      <mat-select [ngModel]="genereSelected" (ngModelChange)="selectGenere($event)">
+        <mat-option *ngFor="let genere of generes" [value]="genere" > {{genere}} </mat-option>
+      </mat-select>
+    </mat-form-field>
   </mat-tab>
-
-
 
   <mat-tab label="Intervalos">
 
@@ -144,13 +148,13 @@
               matInput />
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>Typo</mat-label>
+      <mat-label>Tipo</mat-label>
       <mat-select  [ngModel]="seekerResultElements.typeInterval" (ngModelChange)="selectTypeInterval($event)">
         <mat-option *ngFor="let type of ['Simple','Compuesto']" [value]="type"> {{type}} </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>Direccion</mat-label>
+      <mat-label>Dirección</mat-label>
       <mat-select [ngModel]="seekerResultElements.direction" (ngModelChange)="selectDirection($event)">
         <mat-option *ngFor="let type of ['Ascendente', 'Descendente']" [value]="type"> {{type}} </mat-option>
       </mat-select>

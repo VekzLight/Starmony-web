@@ -1,0 +1,23 @@
+<p>El Código de la progresión debera tener cada grado ( I, II, III, IV, V, VI, VII ) separado por el símbolo "-".</p>
+<p>Cada grado debera tener el tipo de acorde justo después del grado. (ejemplo: Im-II7)</p>
+<p>De no se especificar un tipo de acorde se asumirá que es mayor.</p>
+<p>Puede seleccionar el tipo de acorde con el selector de acorde.</p>
+<br>
+
+<h3>Selector de Acordes</h3>
+<mat-form-field  appearance="fill" class="select-grades">
+    <mat-label>Tipo de Acorde</mat-label>
+    <mat-select  [ngModel]="gradeSelected" (ngModelChange)="selectChord($event)" >
+      <mat-option *ngFor="let type of elementsContainerService.chords" [value]="type.symbol" > {{type.symbol}} </mat-option>
+    </mat-select>
+</mat-form-field>
+<br>
+<br>
+<div>
+    Código de la progresión
+    <input type="text"  [(ngModel)]="code" />
+</div>
+<br>
+
+<br>
+<button (click)="generarProgression()" mat-raised-button> Generar Progresión </button>

@@ -1,0 +1,63 @@
+<h2>Selecciona los intervalos de tu escala</h2>
+<div fxLayout="row wrap" fxLayoutAlign="space-around center" class="note-container">
+    <button class="interval"
+        (click)="selectInterval(interval)"
+        *ngFor="let interval of intervalsSimples"
+        [ngClass]="{
+            'active': elementsContainerService.intervalsSelectedGen.includes(interval),
+            '':  !elementsContainerService.intervalsSelectedGen.includes(interval)
+        }"
+        color="primary"
+        mat-stroked-button> 
+        {{interval.symbol}} 
+    </button>
+</div>
+
+<br>
+
+<h2>Selecciona los semitonos de tu escala</h2>
+<div fxLayout="row wrap" fxLayoutAlign="space-around center" class="note-container">
+    <button class="interval"
+        (click)="selectInterval(interval)"
+        *ngFor="let interval of intervalsSimples"
+        [ngClass]="{
+            'active': elementsContainerService.intervalsSelectedGen.includes(interval),
+            '':  !elementsContainerService.intervalsSelectedGen.includes(interval)
+        }"
+        color="primary"
+        mat-stroked-button> 
+        {{interval.semitones}} 
+    </button>
+</div>
+
+<br>
+
+
+<h2>Visualización sobre la nota C</h2>
+<div fxLayout="row wrap" fxLayoutAlign="space-around center" class="note-container">
+    <button class="note"
+        *ngFor="let note of elementsContainerService.notes"
+        [ngClass]="{
+            'active': compareIdNote(note),
+            'tonic':  note.id == 1
+        }"
+        color="primary"
+        mat-stroked-button> 
+        {{note.symbol}} 
+    </button>
+</div>
+
+<br>
+<br>
+<div>
+    Código en notacion numérica
+    <input type="text"  [(ngModel)]="code" disabled="true"/>
+</div>
+<br>
+
+<div>
+    Código en notacion simbólica
+    <input type="text"  [(ngModel)]="codeSymbol" disabled="true"/>
+</div>
+<br>
+<button (click)="generarEscala()" mat-raised-button>Generar Escala</button>
